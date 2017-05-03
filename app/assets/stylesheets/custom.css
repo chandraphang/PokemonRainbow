@@ -10,10 +10,9 @@
 #footer{
     font-size: 14px;
    }
-
-footer {
-    position: fixed;
-    height: 100px;
-    bottom: 0;
-    width: 100%;
+.navbar{
+    background-color: lightblue;
+}
+a{
+    color: black;
 }

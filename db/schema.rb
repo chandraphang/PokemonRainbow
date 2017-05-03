@@ -10,14 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503063528) do
+ActiveRecord::Schema.define(version: 20170503100435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "applications", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "pokedexes", force: :cascade do |t|
+    t.string   "name",              null: false
+    t.integer  "base_health_point", null: false
+    t.integer  "base_attack",       null: false
+    t.integer  "base_defence",      null: false
+    t.integer  "base_speed",        null: false
+    t.string   "element_type",      null: false
+    t.string   "image_url",         null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["name"], name: "index_pokedexes_on_name", unique: true, using: :btree
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name",         null: false
+    t.string   "power",        null: false
+    t.integer  "max_pp",       null: false
+    t.string   "element_type", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["name"], name: "index_skills_on_name", unique: true, using: :btree
   end
 
 end

@@ -1,0 +1,21 @@
+<div class="container">
+
+<%= button_to "Create Skill", new_skill_path, :method => "get", class:"btn btn-default" , id:"custom-btn"%>
+<table class="table table-bordered">
+<tr>
+  <th>Name</th>
+  <th>Power</th>
+  <th>Max PP</th>
+  <th>Element Type</th>
+</tr>
+<% @skills.each do |f| %>
+<tr>
+  <td class="col-md-2"><%=link_to f.name, f%> </td>
+  <td class="col-md-2"><%= f.power %></td>
+  <td class="col-md-2"><%= f.max_pp %></td>
+  <td class="col-md-2"><%= f.element_type%></td>
+ </tr>
+<% end %>
+</table>
+
+</div>

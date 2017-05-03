@@ -1,0 +1,25 @@
+<div class="container">
+
+<%= button_to "Create Pokemon", new_pokedex_path, :method => "get", class:"btn btn-default" , id:"custom-btn"%>
+<table class="table table-bordered">
+<tr>
+    <th>Name</th>
+    <th>Base HP</th>
+    <th>Base Attack</th>
+    <th>Base Defence</th>
+    <th>Base Speen</th>
+    <th>Element Type</th>
+
+</tr>
+<% @pokedexes.each do |f| %>
+<tr>
+  <td class="col-md-2"><%=link_to f.name, f%> </td>
+  <td class="col-md-2"><%= f.base_health_point %></td>
+  <td class="col-md-2"><%= f.base_attack %></td>
+  <td class="col-md-2"><%= f.base_defence %></td>
+  <td class="col-md-2"><%= f.base_speed %></td>
+  <td class="col-md-2"><%= f.element_type%></td>
+ </tr>
+<% end %>
+</table>
+</div>

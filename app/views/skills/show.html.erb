@@ -1,0 +1,25 @@
+<div class="container">
+
+<table class="table table-bordered">
+
+<tr>
+
+  <th class="col-md-4">Nama: </th>
+  <td class="col-md-4"><%= @skill.name%> </td>
+</tr>
+<tr>
+  <th class="col-md-4">Power:</th>
+  <td class="col-md-4"><%= @skill.power%> </td>
+</tr>
+<tr>
+  <th class="col-md-4">Max PP:</th>
+  <td class="col-md-4"><%= @skill.max_pp %></td>
+</tr>
+<tr>
+  <th class="col-md-4">Element Type:</th>
+  <td class="col-md-4"><%= @skill.element_type%></td>
+   </tr>
+</table>
+<%= link_to 'Edit', edit_skill_path(@skill) %> |
+<%= link_to 'Back', skills_path %>
+</div>
