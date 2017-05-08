@@ -29,3 +29,8 @@ a{
 #custom-btn{
     margin-bottom : 10px;
 }
+
+.pokemon_icon{
+    height: 50px;
+    width: 50px;
+}

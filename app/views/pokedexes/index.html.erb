@@ -1,6 +1,6 @@
 <div class="container">
-
-<%= button_to "Create Pokemon", new_pokedex_path, :method => "get", class:"btn btn-default" , id:"custom-btn"%>
+<h1>Pokedex</h1>
+<%= button_to "Create Pokedex", new_pokedex_path, :method => "get", class:"btn btn-default" , id:"custom-btn"%>
 <table class="table table-bordered">
 <tr>
     <th>Name</th>
@@ -9,7 +9,7 @@
     <th>Base Defence</th>
     <th>Base Speed</th>
     <th>Element Type</th>
-
+    <th>Pokemon Image</th>
 </tr>
 <% @pokedexes.each do |f| %>
 <tr>
@@ -19,6 +19,7 @@
   <td class="col-md-2"><%= f.base_defence %></td>
   <td class="col-md-2"><%= f.base_speed %></td>
   <td class="col-md-2"><%= f.element_type%></td>
+  <td class="col-md-2"><%= image_tag f.image_url, :class => "pokemon_icon" %></td>
  </tr>
 <% end %>
 </table>

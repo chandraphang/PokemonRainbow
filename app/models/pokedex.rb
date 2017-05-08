@@ -1,4 +1,5 @@
 class Pokedex < ApplicationRecord
+    has_many :pokemons, dependent: :destroy
     validates_presence_of :name
     validates_uniqueness_of :name
     validates_presence_of :base_health_point

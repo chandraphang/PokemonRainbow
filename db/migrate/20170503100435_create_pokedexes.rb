@@ -12,5 +12,6 @@ class CreatePokedexes < ActiveRecord::Migration[5.0]
 
     end
     add_index :pokedexes, :name, unique: true
+
   end
 end
