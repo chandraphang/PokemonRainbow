@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :pokemons
+  resources :pokemon_skills
+  resources :pokemons do
+    post 'create_pokemon_skill'
+  end
   resources :pokedexes
   resources :skills
 

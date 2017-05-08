@@ -10,6 +10,32 @@ class PokemonsController < ApplicationController
   # GET /pokemons/1
   # GET /pokemons/1.json
   def show
+    @pokemon = Pokemon.find(params[:id])
+    @pokemon_skills = @pokemon.pokemon_skills
+    @pokemon_skill = PokemonSkill.new
+  end
+
+  def create_pokemon_skill
+
+    @pokemon_skills = PokemonSkill.all
+    @pokemon = Pokemon.find(params[:pokemon_id])
+    @pokemon_skill = PokemonSkill.new
+    @pokemon_skill.pokemon_id =  params[:pokemon_id]
+    @pokemon_skill.skill_id = params[:pokemon_skill][:skill_id]
+
+    @pokemon_skill.current_pp = Skill.find(params[:pokemon_skill][:skill_id]).max_pp
+
+
+
+    respond_to do |format|
+    if @pokemon_skill.save
+        format.html { redirect_to @pokemon, notice: 'Pokemon was successfully created.' }
+        format.json { render :show, status: :created, location: @pokemon }
+      else
+        format.html { render :show }
+        format.json { render json: @pokemon_skill.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /pokemons/new
@@ -77,4 +103,6 @@ class PokemonsController < ApplicationController
     def pokemon_params
       params.require(:pokemon).permit(:name, :pokedex_id)
     end
+
+
 end

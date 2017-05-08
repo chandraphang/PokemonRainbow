@@ -40,8 +40,55 @@
 </tr>
 </table>
 </div>
+
+<div class="new_block add-pokemon-skill">
+  <h2>Skill List</h2>
+  </div>
+
+<table class="table table-bordered">
+<tr>
+  <th>Name</th>
+  <th>PP</th>
+  <th>Power</th>
+  <th>Element Type</th>
+</tr>
+<% @pokemon_skills.each do |f| %>
+<tr>
+  <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, f%> </td>
+  <td class="col-md-2"><%= f.current_pp %> / <%= Skill.find(f.skill_id).max_pp %></td>
+<td class="col-md-2"><%= Skill.find(f.skill_id).power %></td>
+<td class="col-md-2"><%= Skill.find(f.skill_id).element_type %></td>
+ </tr>
+<% end %>
+</table>
+
+<%= form_for(@pokemon_skill, url: pokemon_create_pokemon_skill_path(@pokemon.id)) do |f| %>
+  <div class="new_block add-pokemon-skill">
+  <h2>Add New Skill</h2>
+  </div>
+  <div class="row control-group">
+   <div class="form-group col-xs-12 floating-label-form-group controls">
+     <%= f.label :Skill%>
+     <%= f.select("skill_id", Skill.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+     <% @pokemon_skill.errors.full_messages.each do |message| %>
+        <li class="error_text"><%= message %></li>
+      <% end %>
+
+   </div>
+ </div>
+
+  <div class="actions form col-md-11 col-sm-11">
+    <%= f.button :submit => "Submit", class:"btn btn-default center-block" %>
+  </div>
+<% end %>
+
 <div class="new_block text-center">
 <%= link_to 'Edit', edit_pokemon_path(@pokemon) %> |
 <%= link_to 'Back', pokemons_path %>
 </div>
-</div>
+
+ </div>
+
+
+
+
