@@ -1,25 +1,39 @@
 <div class="container">
-<p id="notice"><%= notice %></p>
+<h1>Pokemon</h1>
+<div class="col-md-4">
+<%= image_tag @pokedex.image_url, :alt => 'product_image' %>
+</div>
+
+<div class="col-md-6">
 <table class="table table-bordered">
 <tr>
-    <th>Name</th>
-    <th>Base HP</th>
-    <th>Base Attack</th>
-    <th>Base De@pokedexence</th>
-    <th>Base Speen</th>
-    <th>Element Type</th>
-
+  <th class="col-md-2">Name</th>
+  <td class="col-md-2"><%=link_to @pokedex.name, @pokedex%> </td>
 </tr>
 <tr>
-  <td class="col-md-2"><%=link_to @pokedex.name, @pokedex%> </td>
-  <td class="col-md-2"><%= @pokedex.base_health_point %></td>
-  <td class="col-md-2"><%= @pokedex.base_attack %></td>
-  <td class="col-md-2"><%= @pokedex.base_defence %></td>
-  <td class="col-md-2"><%= @pokedex.base_speed %></td>
-  <td class="col-md-2"><%= @pokedex.element_type%></td>
- </tr>
-
+  <th class="col-md-2">Base HP</th>
+  <td class="col-md-2"><%=@pokedex.base_health_point%> </td>
+</tr>
+<tr>
+  <th class="col-md-2">Base Attack</th>
+  <td class="col-md-2"><%=@pokedex.base_attack%> </td>
+</tr>
+<tr>
+  <th class="col-md-2">Base Defence</th>
+  <td class="col-md-2"><%=@pokedex.base_defence%> </td>
+</tr>
+<tr>
+  <th class="col-md-2">Base Speed</th>
+  <td class="col-md-2"><%=@pokedex.base_speed%> </td>
+</tr>
+<tr>
+  <th class="col-md-2">Element Type</th>
+  <td class="col-md-2"><%=@pokedex.element_type%> </td>
+</tr>
 </table>
+</div>
+<div class="new_block text-center">
 <%= link_to 'Edit', edit_pokedex_path(@pokedex) %> |
 <%= link_to 'Back', pokedexes_path %>
+</div>
 </div>

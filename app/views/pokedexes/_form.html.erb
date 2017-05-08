@@ -1,7 +1,7 @@
 <%= form_for(pokedex) do |f| %>
-  <% if pokedex.errors.any? %>
+<% if pokedex.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(pokedex.errors.count, "error") %> prohibited this pokedex from being saved:</h2>
+      <h2><%= pluralize(pokedex.errors.count, "error") %> prohibited this skill from being saved:</h2>
 
       <ul>
       <% pokedex.errors.full_messages.each do |message| %>
@@ -14,42 +14,75 @@
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :name%>
      <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
- </div>
+     <% if !@pokedex.errors[:name].blank?%>
+     <li class="error_text">
+     <%= @pokedex.errors.full_messages_for(:name) %>
+     </li>
+     <% end %>
+   </div>
  </div>
  <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :base_health_point%>
      <%= f.text_field :base_health_point, class:"form-control", placeholder: "Base Health Point"%>
- </div>
+     <% if !@pokedex.errors[:base_health_point].blank?%>
+     <li class="error_text">
+     <%= @pokedex.errors.full_messages_for(:base_health_point) %>
+     </li>
+     <% end %>
+  </div>
  </div>
  <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :base_attack%>
      <%= f.text_field :base_attack, class:"form-control", placeholder: "Base Attack"%>
+      <% if !@pokedex.errors[:base_attack].blank?%>
+     <li class="error_text">
+     <%= @pokedex.errors.full_messages_for(:base_attack) %>
+     </li>
+     <% end %>
  </div>
  </div>
  <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :base_defence%>
      <%= f.text_field :base_defence, class:"form-control", placeholder: "Base Defence"%>
+     <% if !@pokedex.errors[:base_defence].blank?%>
+     <li class="error_text">
+     <%= @pokedex.errors.full_messages_for(:base_defence) %>
+     </li>
+     <% end %>
  </div>
  </div>
  <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :base_speed%>
      <%= f.text_field :base_speed, class:"form-control", placeholder: "Base Speed"%>
+     <% if !@pokedex.errors[:base_speed].blank?%>
+     <li class="error_text">
+     <%= @pokedex.errors.full_messages_for(:base_speed) %>
+     </li>
+     <% end %>
  </div>
 </div>
  <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :element_type%>
      <%= f.select(:element_type, options_for_select([['Normal', 'Normal'], ['Fire', 'Fire'], ['Fighting', 'Fighting'], ['Water', 'Water'], ['Flying', 'Flying'], ['Grass', 'Grass'], ['Poison', 'Poison'], ['Electric', 'Electric'], ['Ground', 'Ground'], ['Psychic', 'Psychic'], ['Rock', 'Rock'], ['Ice', 'Ice'], ['Bug', 'Bug'], ['Dragon', 'Dragon'], ['Ghost', 'Ghost'], ['Dark', 'Dark'], ['Steel', 'Steel'], ['Fairy', 'Fairy'] ]), {}, { :class => 'form-control' } ) %>
+     <% if !@pokedex.errors[:element_type].blank?%>
+     <%= @pokedex.errors.full_messages_for(:element_type) %>
+     <% end %>
  </div>
 </div>
 <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :image_url%>
      <%= f.text_field :image_url, class:"form-control", placeholder: "Image URL"%>
+     <% if !@pokedex.errors[:image_url].blank?%>
+     <li class="error_text">
+     <%= @pokedex.errors.full_messages_for(:image_url) %>
+     </li>
+     <% end %>
  </div>
 </div>
   <div class="actions form col-md-11 col-sm-11">

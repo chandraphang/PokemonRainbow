@@ -1,0 +1,8 @@
+Feedback :
+- root pisah dari pokedex
+- rename pokemon jadi pokedex
+- tambahin portlet
+- footer jangan fixed
+- form :
+-- hightligt validasi tambahin di setiap field
+-- buat lebar field konsisten walaupun ada error

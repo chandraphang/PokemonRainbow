@@ -14,18 +14,33 @@
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :name%>
      <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
+      <% if !@skill.errors[:name].blank?%>
+     <li class="error_text">
+     <%= @skill.errors.full_messages_for(:name) %>
+     </li>
+     <% end %>
  </div>
  </div>
  <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :power%>
      <%= f.text_field :power, class:"form-control", placeholder: "Power"%>
+     <% if !@skill.errors[:power].blank?%>
+     <li class="error_text">
+     <%= @skill.errors.full_messages_for(:power) %>
+     </li>
+     <% end %>
  </div>
  </div>
  <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :max_pp%>
      <%= f.text_field :max_pp, class:"form-control", placeholder: "Max PP"%>
+      <% if !@skill.errors[:max_pp].blank?%>
+     <li class="error_text">
+     <%= @skill.errors.full_messages_for(:max_pp) %>
+     </li>
+     <% end %>
  </div>
 </div>
  <div class="row control-group">

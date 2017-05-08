@@ -16,3 +16,16 @@
 a{
     color: black;
 }
+.error_text{
+    color: red;
+    list-style: none;
+}
+.new_block{
+    clear:both;
+    display: block;
+
+}
+
+#custom-btn{
+    margin-bottom : 10px;
+}
