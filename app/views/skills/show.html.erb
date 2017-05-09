@@ -6,7 +6,7 @@
 <div class="new_block add-pokemon-skill">
 <%= link_to 'Back', skills_path, class: "btn btn-default btn-remove" %>
 <%= link_to 'Edit', edit_skill_path(@skill), class: "btn btn-default btn-remove" %>
-<%= link_to "Remove Skill", @skill, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
+<%= link_to "Remove", @skill, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
 </div>
 <table class="table table-bordered">
 

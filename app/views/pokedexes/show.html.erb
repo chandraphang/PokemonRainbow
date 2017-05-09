@@ -7,7 +7,7 @@
 
 <%= link_to 'Back', pokedexes_path, class: "btn btn-default btn-remove" %>
 <%= link_to 'Edit', edit_pokedex_path(@pokedex), class: "btn btn-default btn-remove" %>
-<%= link_to "Remove Pokedex", @pokedex, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
+<%= link_to "Remove", @pokedex, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
 </div>
 <div class="col-md-4">
 <%= image_tag @pokedex.image_url, :alt => 'product_image' %>
