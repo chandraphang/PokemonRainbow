@@ -29,12 +29,22 @@ class PokemonsController < ApplicationController
 
     respond_to do |format|
     if @pokemon_skill.save
-        format.html { redirect_to @pokemon, notice: 'Pokemon was successfully created.' }
+        format.html { redirect_to @pokemon, notice: 'Skill was successfully added.' }
         format.json { render :show, status: :created, location: @pokemon }
       else
         format.html { render :show }
         format.json { render json: @pokemon_skill.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def delete_pokemon_skill
+    @pokemon = Pokemon.find(params[:pokemon_id])
+    @pokemon_skill = PokemonSkill.where(:skill_id => params[:skill_id]).where(:pokemon_id => params[:pokemon_id])
+    @pokemon_skill.destroy_all
+    respond_to do |format|
+      format.html { redirect_to @pokemon, notice: 'Pokemon Skill was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 

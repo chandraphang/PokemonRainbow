@@ -1,5 +1,14 @@
 <div class="container">
-<p id="notice"><%= notice %></p>
+<div class="title-bar">
+<h1 class="title">Pokemon</h1>
+</div>
+<div class ="padding">
+<div class="new_block add-pokemon-skill">
+<%= link_to 'Back', pokemons_path, class: "btn btn-default btn-remove" %>
+<%= link_to 'Edit', edit_pokemon_path(@pokemon), class: "btn btn-default btn-remove" %>
+<%= link_to "Remove", @pokemon, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
+
+</div>
 <div class="col-md-4">
 <%= image_tag Pokedex.find(@pokemon.pokedex_id).image_url, :alt => 'product_image' %>
 </div>
@@ -51,13 +60,15 @@
   <th>PP</th>
   <th>Power</th>
   <th>Element Type</th>
+  <th>Remove Button</th>
 </tr>
 <% @pokemon_skills.each do |f| %>
 <tr>
-  <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, f%> </td>
+  <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, skill_path(f.skill_id)%> </td>
   <td class="col-md-2"><%= f.current_pp %> / <%= Skill.find(f.skill_id).max_pp %></td>
 <td class="col-md-2"><%= Skill.find(f.skill_id).power %></td>
 <td class="col-md-2"><%= Skill.find(f.skill_id).element_type %></td>
+<td class="col-md-2"><%= link_to "Remove", pokemon_delete_pokemon_skill_path(@pokemon.id, f.skill_id), class: "btn btn-default", method: :post, data: {confirm: "Are you sure you want to delete it?"} %></td>
  </tr>
 <% end %>
 </table>
@@ -77,14 +88,11 @@
    </div>
  </div>
 
-  <div class="actions form col-md-11 col-sm-11">
-    <%= f.button :submit => "Submit", class:"btn btn-default center-block" %>
+  <div class="actions form">
+    <%= f.button :submit => "Submit", class:"btn btn-default" %>
   </div>
 <% end %>
 
-<div class="new_block text-center">
-<%= link_to 'Edit', edit_pokemon_path(@pokemon) %> |
-<%= link_to 'Back', pokemons_path %>
 </div>
 
  </div>

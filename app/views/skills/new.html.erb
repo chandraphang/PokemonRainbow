@@ -1,7 +1,10 @@
 <div class="container">
-<h1>New Skill</h1>
+<div class="title-bar">
+<h1 class="title">New Skill</h1>
+</div>
+<div class ="padding">
+<%= link_to 'Back', skills_path, class: "btn btn-default btn-remove" %>
 
 <%= render 'form', skill: @skill %>
-
-<%= link_to 'Back', skills_path %>
+</div>
 </div>

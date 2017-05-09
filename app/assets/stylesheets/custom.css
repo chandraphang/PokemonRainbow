@@ -39,3 +39,24 @@ a{
 
     padding-top: 50px;
 }
+
+.btn-remove{
+    margin-bottom: 20px;
+}
+
+.title-bar{
+    background-color: lightblue;
+}
+
+.title{
+    margin : 0;
+    margin-bottom: 20px;
+    padding: 5px;
+    padding-left: 20px;
+
+}
+
+.padding{
+    padding-right: 30px;
+    padding-left: 30px;
+}

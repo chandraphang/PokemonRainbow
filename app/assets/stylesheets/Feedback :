@@ -1,8 +1,5 @@
 Feedback :
-- root pisah dari pokedex
-- rename pokemon jadi pokedex
-- tambahin portlet
-- footer jangan fixed
-- form :
--- hightligt validasi tambahin di setiap field
--- buat lebar field konsisten walaupun ada error
+- tambahin remove untuk pokemon_skill
+- button navigasi pindahin ke atas kiri
+- pindahin title untuk suatu box ke atas, dikasi pembeda / pembatas
+- implement delete untuk smua resource

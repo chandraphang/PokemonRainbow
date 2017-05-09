@@ -1,7 +1,10 @@
 <div class="container">
-<h1>New Pokedex</h1>
+<div class="title-bar">
+<h1 class="title">New Pokedex</h1>
+</div>
+<div class ="padding">
+<%= link_to 'Back', pokedexes_path, class: "btn btn-default btn-remove" %>
 
 <%= render 'form', pokedex: @pokedex %>
-
-<%= link_to 'Back', pokedexes_path %>
+</div>
 </div>

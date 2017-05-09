@@ -1,5 +1,13 @@
 <div class="container">
-<h1>Skill</h1>
+<div class="title-bar">
+<h1 class="title">Skill</h1>
+</div>
+<div class ="padding">
+<div class="new_block add-pokemon-skill">
+<%= link_to 'Back', skills_path, class: "btn btn-default btn-remove" %>
+<%= link_to 'Edit', edit_skill_path(@skill), class: "btn btn-default btn-remove" %>
+<%= link_to "Remove Skill", @skill, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
+</div>
 <table class="table table-bordered">
 
 <tr>
@@ -20,6 +28,5 @@
   <td class="col-md-4"><%= @skill.element_type%></td>
    </tr>
 </table>
-<%= link_to 'Edit', edit_skill_path(@skill) %> |
-<%= link_to 'Back', skills_path %>
+</div>
 </div>

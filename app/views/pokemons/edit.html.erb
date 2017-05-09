@@ -1,9 +1,12 @@
 <div class="container">
-<h1>Editing Pokemon</h1>
+<div class="title-bar">
+<h1 class="title">Editing Pokemon</h1>
+</div>
+<div class ="padding">
+<%= link_to 'Back', @pokemon, class: "btn btn-default btn-remove" %>
 <h3><%= @pokemon.name %></h3>
 <h4><%=Pokedex.find(@pokemon.pokedex_id).name%></h4>
 <%= render 'form_edit', pokemon: @pokemon %>
 
-<%= link_to 'Show', @pokemon %> |
-<%= link_to 'Back', pokemons_path %>
+</div>
 </div>
