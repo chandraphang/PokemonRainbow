@@ -62,7 +62,7 @@
   <th>Element Type</th>
   <th>Remove Button</th>
 </tr>
-<% @pokemon_skills.each do |f| %>
+<% @pokemon.pokemon_skills.each do |f| %>
 <tr>
   <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, skill_path(f.skill_id)%> </td>
   <td class="col-md-2"><%= f.current_pp %> / <%= Skill.find(f.skill_id).max_pp %></td>

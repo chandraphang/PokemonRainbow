@@ -16,8 +16,6 @@ class PokemonsController < ApplicationController
   end
 
   def create_pokemon_skill
-
-    @pokemon_skills = PokemonSkill.all
     @pokemon = Pokemon.find(params[:pokemon_id])
     @pokemon_skill = PokemonSkill.new
     @pokemon_skill.pokemon_id =  params[:pokemon_id]
@@ -83,7 +81,7 @@ class PokemonsController < ApplicationController
   # PATCH/PUT /pokemons/1.json
   def update
     respond_to do |format|
-      if @pokemon.update(pokemon_params)
+      if @pokemon.update(update_pokemon_params)
         format.html { redirect_to @pokemon, notice: 'Pokemon was successfully updated.' }
         format.json { render :show, status: :ok, location: @pokemon }
       else
@@ -112,6 +110,10 @@ class PokemonsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pokemon_params
       params.require(:pokemon).permit(:name, :pokedex_id)
+    end
+
+    def update_pokemon_params
+      params.require(:pokemon).permit(:name, :pokedex_id, :level, :max_health_point, :current_health_point, :attack, :defence, :speed, :current_experience)
     end
 
 

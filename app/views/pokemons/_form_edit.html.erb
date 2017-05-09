@@ -17,7 +17,7 @@
      <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
      <% if !@pokemon.errors[:name].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:name) %>
+     <%= @pokemon.errors.full_messages_for(:name).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -29,7 +29,7 @@
      <%= f.select("pokedex_id", Pokedex.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
      <% if !@pokemon.errors[:pokedex_id].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:pokedex_id) %>
+     <%= @pokemon.errors.full_messages_for(:pokedex_id).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -41,7 +41,7 @@
      <%= f.text_field :level, class:"form-control", placeholder: "Level"%>
      <% if !@pokemon.errors[:level].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:level) %>
+     <%= @pokemon.errors.full_messages_for(:level).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -53,7 +53,7 @@
      <%= f.text_field :max_health_point, class:"form-control", placeholder: "Max Health Point"%>
      <% if !@pokemon.errors[:max_health_point].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:max_health_point) %>
+     <%= @pokemon.errors.full_messages_for(:max_health_point).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -65,7 +65,7 @@
      <%= f.text_field :current_health_point, class:"form-control", placeholder: "Current Health Point"%>
      <% if !@pokemon.errors[:current_health_point].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:current_health_point) %>
+     <%= @pokemon.errors.full_messages_for(:current_health_point).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -77,7 +77,7 @@
      <%= f.text_field :attack, class:"form-control", placeholder: "Attack"%>
      <% if !@pokemon.errors[:attack].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:attack) %>
+     <%= @pokemon.errors.full_messages_for(:attack).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -89,7 +89,7 @@
      <%= f.text_field :defence, class:"form-control", placeholder: "Defence"%>
      <% if !@pokemon.errors[:defence].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:defence) %>
+     <%= @pokemon.errors.full_messages_for(:defence).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -101,7 +101,7 @@
      <%= f.text_field :speed, class:"form-control", placeholder: "Speed"%>
      <% if !@pokemon.errors[:speed].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:speed) %>
+     <%= @pokemon.errors.full_messages_for(:speed).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -113,7 +113,7 @@
      <%= f.text_field :current_experience, class:"form-control", placeholder: "Current Experience"%>
      <% if !@pokemon.errors[:current_experience].blank?%>
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:current_experience) %>
+     <%= @pokemon.errors.full_messages_for(:current_experience).join(', ') %>
      </li>
      <% end %>
    </div>

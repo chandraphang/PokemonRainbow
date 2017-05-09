@@ -16,7 +16,7 @@
      <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
      <% if !@pokedex.errors[:name].blank?%>
      <li class="error_text">
-     <%= @pokedex.errors.full_messages_for(:name) %>
+     <%= @pokedex.errors.full_messages_for(:name).join(', ') %>
      </li>
      <% end %>
    </div>
@@ -27,7 +27,7 @@
      <%= f.text_field :base_health_point, class:"form-control", placeholder: "Base Health Point"%>
      <% if !@pokedex.errors[:base_health_point].blank?%>
      <li class="error_text">
-     <%= @pokedex.errors.full_messages_for(:base_health_point) %>
+     <%= @pokedex.errors.full_messages_for(:base_health_point).join(', ') %>
      </li>
      <% end %>
   </div>
@@ -38,7 +38,7 @@
      <%= f.text_field :base_attack, class:"form-control", placeholder: "Base Attack"%>
       <% if !@pokedex.errors[:base_attack].blank?%>
      <li class="error_text">
-     <%= @pokedex.errors.full_messages_for(:base_attack) %>
+     <%= @pokedex.errors.full_messages_for(:base_attack).join(', ') %>
      </li>
      <% end %>
  </div>
@@ -49,7 +49,7 @@
      <%= f.text_field :base_defence, class:"form-control", placeholder: "Base Defence"%>
      <% if !@pokedex.errors[:base_defence].blank?%>
      <li class="error_text">
-     <%= @pokedex.errors.full_messages_for(:base_defence) %>
+     <%= @pokedex.errors.full_messages_for(:base_defence).join(', ') %>
      </li>
      <% end %>
  </div>
@@ -60,7 +60,7 @@
      <%= f.text_field :base_speed, class:"form-control", placeholder: "Base Speed"%>
      <% if !@pokedex.errors[:base_speed].blank?%>
      <li class="error_text">
-     <%= @pokedex.errors.full_messages_for(:base_speed) %>
+     <%= @pokedex.errors.full_messages_for(:base_speed).join(', ') %>
      </li>
      <% end %>
  </div>
@@ -70,7 +70,7 @@
      <%= f.label :element_type%>
      <%= f.select(:element_type, options_for_select([['Normal', 'Normal'], ['Fire', 'Fire'], ['Fighting', 'Fighting'], ['Water', 'Water'], ['Flying', 'Flying'], ['Grass', 'Grass'], ['Poison', 'Poison'], ['Electric', 'Electric'], ['Ground', 'Ground'], ['Psychic', 'Psychic'], ['Rock', 'Rock'], ['Ice', 'Ice'], ['Bug', 'Bug'], ['Dragon', 'Dragon'], ['Ghost', 'Ghost'], ['Dark', 'Dark'], ['Steel', 'Steel'], ['Fairy', 'Fairy'] ]), {}, { :class => 'form-control' } ) %>
      <% if !@pokedex.errors[:element_type].blank?%>
-     <%= @pokedex.errors.full_messages_for(:element_type) %>
+     <%= @pokedex.errors.full_messages_for(:element_type).join(', ') %>
      <% end %>
  </div>
 </div>
@@ -80,7 +80,7 @@
      <%= f.text_field :image_url, class:"form-control", placeholder: "Image URL"%>
      <% if !@pokedex.errors[:image_url].blank?%>
      <li class="error_text">
-     <%= @pokedex.errors.full_messages_for(:image_url) %>
+     <%= @pokedex.errors.full_messages_for(:image_url).join(', ') %>
      </li>
      <% end %>
  </div>

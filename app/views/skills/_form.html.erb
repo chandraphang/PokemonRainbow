@@ -16,7 +16,7 @@
      <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
       <% if !@skill.errors[:name].blank?%>
      <li class="error_text">
-     <%= @skill.errors.full_messages_for(:name) %>
+     <%= @skill.errors.full_messages_for(:name).join(', ') %>
      </li>
      <% end %>
  </div>
@@ -27,7 +27,7 @@
      <%= f.text_field :power, class:"form-control", placeholder: "Power"%>
      <% if !@skill.errors[:power].blank?%>
      <li class="error_text">
-     <%= @skill.errors.full_messages_for(:power) %>
+     <%= @skill.errors.full_messages_for(:power).join(', ') %>
      </li>
      <% end %>
  </div>
@@ -38,7 +38,7 @@
      <%= f.text_field :max_pp, class:"form-control", placeholder: "Max PP"%>
       <% if !@skill.errors[:max_pp].blank?%>
      <li class="error_text">
-     <%= @skill.errors.full_messages_for(:max_pp) %>
+     <%= @skill.errors.full_messages_for(:max_pp).join(', ') %>
      </li>
      <% end %>
  </div>

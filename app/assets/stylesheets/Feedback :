@@ -1,5 +1,7 @@
 Feedback :
-- tambahin remove untuk pokemon_skill
-- button navigasi pindahin ke atas kiri
-- pindahin title untuk suatu box ke atas, dikasi pembeda / pembatas
-- implement delete untuk smua resource
+- pokedex
+-- image boleh kosong
+-- error message dijoin saja
+
+refactor :
+- inclusion dipindahkan menjadi constant aja (skill sama pokedex)

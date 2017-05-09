@@ -1,11 +1,10 @@
 class Pokedex < ApplicationRecord
+    ELEMENT_LIST = ["Normal", "Fire", "Fighting", "Water", "Flying", "Grass", "Electric", "Psychic", "Rock", "Ice", "Bug", "Dragon", "Ghost", "Dark", "Steel", "Fairy"]
     has_many :pokemons, dependent: :destroy
-    validates_presence_of :name
-    validates_uniqueness_of :name
-    validates_presence_of :base_health_point
-    validates_presence_of :base_attack
-    validates_presence_of :base_defence
-    validates_presence_of :base_speed
-    validates_presence_of :element_type
-    validates_presence_of :image_url
+    validates :name, :presence =>true,:uniqueness => true
+    validates :element_type, :presence => true, :inclusion => { in: ELEMENT_LIST }
+    validates :base_health_point, :presence =>true,:numericality => { :greater_than => 0 }
+    validates :base_attack, :presence =>true,:numericality => { :greater_than => 0 }
+    validates :base_defence, :presence =>true,:numericality => { :greater_than => 0 }
+    validates :base_speed, :presence =>true,:numericality => { :greater_than => 0 }
 end
