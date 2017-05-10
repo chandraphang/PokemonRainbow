@@ -17,7 +17,6 @@ class PokemonBattleDecorator
     :current_hp_pokemon2,
     :link_to_pokemon1,
     :link_to_pokemon2,
-    :link_to_show,
     :link_to_edit,
     :link_to_remove
   )
@@ -47,7 +46,7 @@ class PokemonBattleDecorator
 
       result = DecoratorResult.new
       result.pokemon1 = set_pokemon_name(pokemon_battle.pokemon1)
-      result.pokemon2 = set_pokemon_name(pokemon_battle.pokemon2_id)
+      result.pokemon2 = set_pokemon_name(pokemon_battle.pokemon2)
       result.current_turn = pokemon_battle.current_turn
       result.pokemon_winner_id = pokemon_battle.pokemon_winner_id
       result.pokemon_loser_id = pokemon_battle.pokemon_loser_id
@@ -56,9 +55,8 @@ class PokemonBattleDecorator
       result.image_pokemon2 = set_image(pokemon_battle.pokemon2)
       result.current_hp_pokemon1 = set_current_hp(pokemon_battle.pokemon1)
       result.current_hp_pokemon2 = set_current_hp(pokemon_battle.pokemon2)
-      result.link_to_pokemon1 = set_link_to_pokemon(pokemon_battle.pokemon1)
-      result.link_to_pokemon2 = set_link_to_pokemon(pokemon_battle.pokemon2)
-      result.link_to_show = set_link_to_show(pokemon_battle)
+      result.link_to_pokemon1 = set_link_to_pokemon1(pokemon_battle)
+      result.link_to_pokemon2 = set_link_to_pokemon2(pokemon_battle)
       result.link_to_edit = set_link_to_edit(pokemon_battle)
       result.link_to_remove = set_link_to_remove(pokemon_battle)
       result
@@ -75,8 +73,12 @@ class PokemonBattleDecorator
     pokemon.current_health_point.to_s + ' / ' + pokemon.max_health_point.to_s
   end
 
-  def set_link_to_pokemon(pokemon)
-    @context.helpers.link_to pokemon.name, pokemon
+  def set_link_to_pokemon1(pokemon_battle)
+    @context.helpers.link_to pokemon_battle.pokemon1.name, pokemon_battle
+  end
+
+  def set_link_to_pokemon2(pokemon_battle)
+    @context.helpers.link_to pokemon_battle.pokemon2.name, pokemon_battle
   end
 
   def set_image(pokemon)

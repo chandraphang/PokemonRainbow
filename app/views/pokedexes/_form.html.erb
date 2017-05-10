@@ -67,7 +67,7 @@
 <div class="row control-group">
  <div class="form-group col-xs-12 floating-label-form-group controls">
    <%= f.label :element_type%>
-   <%= f.select(:element_type, options_for_select([['Normal', 'Normal'], ['Fire', 'Fire'], ['Fighting', 'Fighting'], ['Water', 'Water'], ['Flying', 'Flying'], ['Grass', 'Grass'], ['Poison', 'Poison'], ['Electric', 'Electric'], ['Ground', 'Ground'], ['Psychic', 'Psychic'], ['Rock', 'Rock'], ['Ice', 'Ice'], ['Bug', 'Bug'], ['Dragon', 'Dragon'], ['Ghost', 'Ghost'], ['Dark', 'Dark'], ['Steel', 'Steel'], ['Fairy', 'Fairy'] ]), {}, { :class => 'form-control' } ) %>
+   <%= f.select(:element_type, options_for_select(Pokedex.element_type.options), {}, { :class => 'form-control' } ) %>
    <% if !@pokedex.errors[:element_type].blank?%>
    <%= @pokedex.errors.full_messages_for(:element_type).join(', ') %>
    <% end %>
