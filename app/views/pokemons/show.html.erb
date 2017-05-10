@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <th class="col-md-2">HP</th>
-          <td class="col-md-2"><%=@decorated_pokemon.current_health_point%> / <%=@decorated_pokemon.max_health_point%></td>
+          <td class="col-md-2"><%=@decorated_pokemon.current_health_point%></td>
         </tr>
         <tr>
           <th class="col-md-2">Attack</th>
@@ -65,16 +65,16 @@
       <% @decorated_pokemon_skills.each do |f| %>
       <tr>
         <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, skill_path(f.skill_id)%> </td>
-        <td class="col-md-2"><%= f.current_pp %> / <%= Skill.find(f.skill_id).max_pp %></td>
+        <td class="col-md-2"><%= f.current_pp%></td>
         <td class="col-md-2"><%= Skill.find(f.skill_id).power %></td>
         <td class="col-md-2"><%= Skill.find(f.skill_id).element_type %></td>
-        <td class="col-md-2"><%= link_to "Remove", pokemon_delete_pokemon_skill_path(@pokemon.id, f.skill_id), class: "btn btn-default", method: :post, data: {confirm: "Are you sure you want to delete it?"} %></td>
+        <td class="col-md-2"><%= f.link_to_remove%></td>
       </tr>
       <% end %>
       <% end %>
     </table>
 
-    <%= form_for(@pokemon_skill, url: pokemon_create_pokemon_skill_path(@pokemon.id)) do |f| %>
+    <%= form_for(@pokemon_skill, url: pokemon_create_pokemon_skill_path(@decorated_pokemon.id)) do |f| %>
     <div class="new_block add-pokemon-skill">
       <h2>Add New Skill</h2>
     </div>

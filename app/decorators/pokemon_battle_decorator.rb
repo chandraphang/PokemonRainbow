@@ -11,8 +11,6 @@ class PokemonBattleDecorator
     :pokemon_winner_id,
     :pokemon_loser_id,
     :experience_gain,
-    :pokemon1_max_health_point,
-    :pokemon2_max_health_point,
     :image_pokemon1,
     :image_pokemon2,
     :current_hp_pokemon1,
@@ -29,6 +27,7 @@ class PokemonBattleDecorator
   end
 
   def decorate_for_index(pokemon_battles)
+
     results = []
     pokemon_battles.each do |pokemon_battle|
       results << generate_decorator_result(pokemon_battle)
@@ -45,15 +44,14 @@ class PokemonBattleDecorator
 
   def generate_decorator_result(pokemon_battle)
     if pokemon_battle.present?
+
       result = DecoratorResult.new
       result.pokemon1 = set_pokemon_name(pokemon_battle.pokemon1)
-      result.pokemon2 = set_pokemon_name(pokemon_battle.pokemon2)
+      result.pokemon2 = set_pokemon_name(pokemon_battle.pokemon2_id)
       result.current_turn = pokemon_battle.current_turn
       result.pokemon_winner_id = pokemon_battle.pokemon_winner_id
       result.pokemon_loser_id = pokemon_battle.pokemon_loser_id
       result.experience_gain = pokemon_battle.experience_gain
-      result.pokemon1_max_health_point = pokemon_battle.pokemon1_max_health_point
-      result.pokemon2_max_health_point = pokemon_battle.pokemon2_max_health_point
       result.image_pokemon1 = set_image(pokemon_battle.pokemon1)
       result.image_pokemon2 = set_image(pokemon_battle.pokemon2)
       result.current_hp_pokemon1 = set_current_hp(pokemon_battle.pokemon1)
@@ -69,11 +67,12 @@ class PokemonBattleDecorator
     end
   end
   def set_pokemon_name(pokemon)
-    pokemon.name
+    Pokemon.find(pokemon).name
   end
 
   def set_current_hp(pokemon)
-    pokemon.current_health_point
+
+    pokemon.current_health_point.to_s + ' / ' + pokemon.max_health_point.to_s
   end
 
   def set_link_to_pokemon(pokemon)

@@ -23,16 +23,22 @@ class PokemonsController < ApplicationController
   end
 
   def create_pokemon_skill
-    @pokemon = Pokemon.find(params[:pokemon_id])
+    pokemon = Pokemon.find(params[:pokemon_id])
     @pokemon_skill = PokemonSkill.new
     @pokemon_skill.pokemon_id =  params[:pokemon_id]
     @pokemon_skill.skill_id = params[:pokemon_skill][:skill_id]
     @pokemon_skill.current_pp = Skill.find(params[:pokemon_skill][:skill_id]).max_pp
 
+    decorator = PokemonDecorator.new(self)
+    @decorated_pokemon = decorator.decorate_for_show(pokemon)
+
+    decorator_pokemon_skill = PokemonSkillDecorator.new(self)
+    @decorated_pokemon_skills = decorator_pokemon_skill.decorate_for_index(pokemon.pokemon_skills)
+
     respond_to do |format|
     if @pokemon_skill.save
-        format.html { redirect_to @pokemon, notice: 'Skill was successfully added.' }
-        format.json { render :show, status: :created, location: @pokemon }
+        format.html { redirect_to pokemon, notice: 'Skill was successfully added.' }
+        format.json { render :show, status: :created, location: pokemon }
       else
         format.html { render :show }
         format.json { render json: @pokemon_skill.errors, status: :unprocessable_entity }

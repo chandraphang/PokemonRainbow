@@ -1,8 +1,4 @@
-state inclusion in ongoing, finish
-pokemon winner / loser boleh kosong
-exp gain boleh kosong
-
-default value
-state = ongoing
-current turn = 1
-pokemon max healt point sesuai dengan pokemon nya masing2
+feedback :
+- untuk di pokemon, current hp pake decorator
+- benerin header portlet di pokemon_battle
+- tambahin validation untuk relation antara pokemon dan pokemon_battle agar ketika pokemon di delete, pokemon_battlenya jg di delete

@@ -35,7 +35,7 @@ class PokemonSkillDecorator
       result = DecoratorResult.new
       result.pokemon_id = pokemon_skill.pokemon_id
       result.skill_id = pokemon_skill.skill_id
-      result.current_pp = pokemon_skill.skill
+      result.current_pp = set_current_pp(pokemon_skill)
       result.link_to_show = set_link_to_show(pokemon_skill.skill)
       result.link_to_remove = set_link_to_remove(pokemon_skill)
       result
@@ -44,11 +44,17 @@ class PokemonSkillDecorator
     end
   end
 
+  def set_current_pp(pokemon_skill)
+
+    pokemon_skill.current_pp.to_s + ' / ' +pokemon_skill.skill.max_pp.to_s
+
+  end
+
   def set_link_to_show(skill)
     @context.helpers.link_to skill.name, skill
   end
 
   def set_link_to_remove(pokemon_skill)
-    @context.helpers.link_to 'Remove', pokemon_skill, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+    @context.helpers.link_to 'Remove', pokemon_delete_pokemon_skill_path(pokemon_skill.pokemon_id, pokemon_skill.skill_id), :method => 'post', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
   end
 end

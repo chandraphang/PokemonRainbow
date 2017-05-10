@@ -4,10 +4,10 @@ class PokemonDecorator
   include ActionView::Helpers::UrlHelper
 
   DecoratorResult = Struct.new(
+    :id,
     :pokedex_id,
     :name,
     :level,
-    :max_health_point,
     :current_health_point,
     :attack,
     :defence,
@@ -42,10 +42,10 @@ class PokemonDecorator
   def generate_decorator_result(pokemon)
     result = DecoratorResult.new
     result.pokedex_id = pokemon.pokedex_id
+    result.id = pokemon.id
     result.name = pokemon.name
     result.level = pokemon.level
-    result.max_health_point = pokemon.max_health_point
-    result.current_health_point = pokemon.current_health_point
+    result.current_health_point = set_current_hp(pokemon)
     result.attack = pokemon.attack
     result.defence = pokemon.defence
     result.speed = pokemon.speed
@@ -57,6 +57,10 @@ class PokemonDecorator
     result.link_to_remove = set_link_to_remove(pokemon)
 
     result
+  end
+
+  def set_current_hp(pokemon)
+    pokemon.current_health_point.to_s + ' / ' + pokemon.max_health_point.to_s
   end
 
   def set_element_type(pokemon)
