@@ -35,7 +35,7 @@ class PokemonSkillDecorator
       result = DecoratorResult.new
       result.pokemon_id = pokemon_skill.pokemon_id
       result.skill_id = pokemon_skill.skill_id
-      result.current_pp = pokemon_skill.current_pp
+      result.current_pp = pokemon_skill.skill
       result.link_to_show = set_link_to_show(pokemon_skill.skill)
       result.link_to_remove = set_link_to_remove(pokemon_skill)
       result
