@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="title-bar">
+    <h1 class="title">Pokemons</h1>
+  </div>
+  <div class ="padding">
+  <%= button_to "Create Battle", new_pokemon_battle_path, :method => "get", class:"btn btn-default" , id:"custom-btn"%>
+
+  <table class="table table-bordered">
+<tr>
+    <th>Pokemon 1</th>
+    <th>Pokemon 2</th>
+    <th>Turn</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+<% @pokemon_battles.each do |f| %>
+<tr>
+  <td class="col-md-1"><%=Pokemon.find(f.pokemon1_id).name%> </td>
+  <td class="col-md-1"><%=Pokemon.find(f.pokemon2_id).name%></td>
+  <td class="col-md-1"><%=f.current_turn%> </td>
+  <td class="col-md-1"><%=f.state%></td>
+  <td class="col-md-1"><%= link_to 'Show', pokemon_battle_path(f), class: "btn btn-default btn-remove" %> <%= link_to "Destroy", f, class: "btn btn-default btn-remove", :method =>"delete", data: {confirm: "Are you sure you want to delete it?"} %> </td>
+
+ </tr>
+<% end %>
+</table>
+
+  </div>
+</div>

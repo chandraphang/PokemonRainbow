@@ -1,7 +1,8 @@
-Feedback :
-- pokedex
--- image boleh kosong
--- error message dijoin saja
+state inclusion in ongoing, finish
+pokemon winner / loser boleh kosong
+exp gain boleh kosong
 
-refactor :
-- inclusion dipindahkan menjadi constant aja (skill sama pokedex)
+default value
+state = ongoing
+current turn = 1
+pokemon max healt point sesuai dengan pokemon nya masing2
