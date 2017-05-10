@@ -5,14 +5,15 @@ class PokemonDecorator
 
   DecoratorResult = Struct.new(
     :pokedex_id,
-
     :name,
-    :base_health_point,
-    :base_attack,
-    :base_defence,
-    :base_speed,
+    :level,
+    :max_health_point,
+    :current_health_point,
+    :attack,
+    :defence,
+    :speed,
     :element_type,
-    :icon,
+    :current_experience,
     :image,
     :link_to_show,
     :link_to_edit,
@@ -23,55 +24,58 @@ class PokemonDecorator
     @context = context
   end
 
-  def decorate_for_index(pokedexes)
+  def decorate_for_index(pokemons)
     results = []
-    pokedexes.each do |pokedex|
-      results << generate_decorator_result(pokedex)
+    pokemons.each do |pokemon|
+      results << generate_decorator_result(pokemon)
     end
     results
   end
 
-  def decorate_for_show(pokedex)
-    result = generate_decorator_result(pokedex)
+  def decorate_for_show(pokemon)
+    result = generate_decorator_result(pokemon)
     result
   end
 
   private
 
-  def generate_decorator_result(pokedex)
+  def generate_decorator_result(pokemon)
     result = DecoratorResult.new
-    result.name = pokedex.name
-    result.base_health_point = pokedex.base_health_point
-    result.base_attack = pokedex.base_attack
-    result.base_defence = pokedex.base_defence
-    result.base_speed = pokedex.base_speed
-    result.element_type = pokedex.element_type
-    result.icon = set_icon(pokedex.image_url)
-    result.image = set_image(pokedex.image_url)
-    result.link_to_show = set_link_to_show(pokedex)
-    result.link_to_edit = set_link_to_edit(pokedex)
-    result.link_to_remove = set_link_to_remove(pokedex)
+    result.pokedex_id = pokemon.pokedex_id
+    result.name = pokemon.name
+    result.level = pokemon.level
+    result.max_health_point = pokemon.max_health_point
+    result.current_health_point = pokemon.current_health_point
+    result.attack = pokemon.attack
+    result.defence = pokemon.defence
+    result.speed = pokemon.speed
+    result.element_type = set_element_type(pokemon.pokedex_id)
+    result.current_experience = pokemon.current_experience
+    result.image = set_image(pokemon.pokedex_id)
+    result.link_to_show = set_link_to_show(pokemon)
+    result.link_to_edit = set_link_to_edit(pokemon)
+    result.link_to_remove = set_link_to_remove(pokemon)
 
     result
   end
 
-  def set_icon(image_url)
-    image_tag image_url, :class => 'pokemon_icon'
+  def set_element_type(pokemon)
+    Pokedex.find(pokemon).element_type
   end
 
-  def set_image(image_url)
-    image_tag image_url, :alt => 'product_image'
+  def set_image(pokemon)
+    image_tag Pokedex.find(pokemon).image_url, :alt => 'Pokemon Image'
   end
 
-  def set_link_to_show(pokedex)
-    @context.helpers.link_to pokedex.name, pokedex
+  def set_link_to_show(pokemon)
+    @context.helpers.link_to pokemon.name, pokemon
   end
 
-  def set_link_to_edit(pokedex)
-    @context.helpers.link_to 'Edit', edit_pokedex_path(pokedex), class: 'btn btn-default btn-remove'
+  def set_link_to_edit(pokemon)
+    @context.helpers.link_to 'Edit', edit_pokemon_path(pokemon), class: 'btn btn-default btn-remove'
   end
 
-  def set_link_to_remove(pokedex)
-    @context.helpers.link_to 'Remove', pokedex, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+  def set_link_to_remove(pokemon)
+    @context.helpers.link_to 'Remove', pokemon, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
   end
 end

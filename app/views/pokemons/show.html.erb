@@ -4,48 +4,47 @@
   </div>
   <div class ="padding">
     <div class="new_block add-pokemon-skill">
-      <%= link_to 'Back', pokemons_path, class: "btn btn-default btn-remove" %>
-      <%= link_to 'Edit', edit_pokemon_path(@pokemon), class: "btn btn-default btn-remove" %>
-      <%= link_to "Remove", @pokemon, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
+      <%= @decorated_pokemon.link_to_edit %>
+      <%= @decorated_pokemon.link_to_remove %>
 
     </div>
     <div class="col-md-4">
-      <%= image_tag Pokedex.find(@pokemon.pokedex_id).image_url, :alt => 'product_image' %>
+      <%= @decorated_pokemon.image %>
     </div>
 
     <div class="col-md-6">
       <table class="table table-bordered">
         <tr>
           <th class="col-md-2">Name</th>
-          <td class="col-md-2"><%=link_to @pokemon.name, @pokemon%> </td>
+          <td class="col-md-2"><%=@decorated_pokemon.name%> </td>
         </tr>
         <tr>
           <th class="col-md-2">Level</th>
-          <td class="col-md-2"><%=@pokemon.level%></td>
+          <td class="col-md-2"><%=@decorated_pokemon.level%></td>
         </tr>
         <tr>
           <th class="col-md-2">HP</th>
-          <td class="col-md-2"><%=@pokemon.current_health_point%> / <%=@pokemon.max_health_point%></td>
+          <td class="col-md-2"><%=@decorated_pokemon.current_health_point%> / <%=@decorated_pokemon.max_health_point%></td>
         </tr>
         <tr>
           <th class="col-md-2">Attack</th>
-          <td class="col-md-2"><%=@pokemon.attack%> </td>
+          <td class="col-md-2"><%=@decorated_pokemon.attack%> </td>
         </tr>
         <tr>
           <th class="col-md-2">Defence</th>
-          <td class="col-md-2"><%=@pokemon.defence%> </td>
+          <td class="col-md-2"><%=@decorated_pokemon.defence%> </td>
         </tr>
         <tr>
           <th class="col-md-2">Speed</th>
-          <td class="col-md-2"><%=@pokemon.speed%> </td>
+          <td class="col-md-2"><%=@decorated_pokemon.speed%> </td>
         </tr>
         <tr>
           <th class="col-md-2">Current Experience</th>
-          <td class="col-md-2"><%=@pokemon.current_experience%> </td>
+          <td class="col-md-2"><%=@decorated_pokemon.current_experience%> </td>
         </tr>
         <tr>
           <th class="col-md-2">Type</th>
-          <td class="col-md-2"><%= Pokedex.find(@pokemon.pokedex_id).element_type%> </td>
+          <td class="col-md-2"><%= @decorated_pokemon.element_type%> </td>
         </tr>
       </table>
     </div>
@@ -62,7 +61,8 @@
         <th>Element Type</th>
         <th>Action</th>
       </tr>
-      <% @pokemon.pokemon_skills.each do |f| %>
+      <%if !@decorated_pokemon_skills.blank? %>
+      <% @decorated_pokemon_skills.each do |f| %>
       <tr>
         <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, skill_path(f.skill_id)%> </td>
         <td class="col-md-2"><%= f.current_pp %> / <%= Skill.find(f.skill_id).max_pp %></td>
@@ -70,6 +70,7 @@
         <td class="col-md-2"><%= Skill.find(f.skill_id).element_type %></td>
         <td class="col-md-2"><%= link_to "Remove", pokemon_delete_pokemon_skill_path(@pokemon.id, f.skill_id), class: "btn btn-default", method: :post, data: {confirm: "Are you sure you want to delete it?"} %></td>
       </tr>
+      <% end %>
       <% end %>
     </table>
 
@@ -92,6 +93,8 @@
     <%= f.button :submit => "Submit", class:"btn btn-default" %>
   </div>
   <% end %>
+
+
 
 </div>
 

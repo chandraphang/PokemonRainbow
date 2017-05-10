@@ -17,43 +17,43 @@ class SkillDecorator
     @context = context
   end
 
-  def decorate_for_index(pokedexes)
+  def decorate_for_index(skills)
     results = []
-    pokedexes.each do |pokedex|
-      results << generate_decorator_result(pokedex)
+    skills.each do |skill|
+      results << generate_decorator_result(skill)
     end
     results
   end
 
-  def decorate_for_show(pokedex)
-    result = generate_decorator_result(pokedex)
+  def decorate_for_show(skill)
+    result = generate_decorator_result(skill)
     result
   end
 
   private
 
-  def generate_decorator_result(pokedex)
+  def generate_decorator_result(skill)
     result = DecoratorResult.new
-    result.name = pokedex.name
-    result.power = pokedex.power
-    result.max_pp = pokedex.max_pp
-    result.element_type = pokedex.element_type
-    result.link_to_show = set_link_to_show(pokedex)
-    result.link_to_edit = set_link_to_edit(pokedex)
-    result.link_to_remove = set_link_to_remove(pokedex)
+    result.name = skill.name
+    result.power = skill.power
+    result.max_pp = skill.max_pp
+    result.element_type = skill.element_type
+    result.link_to_show = set_link_to_show(skill)
+    result.link_to_edit = set_link_to_edit(skill)
+    result.link_to_remove = set_link_to_remove(skill)
 
     result
   end
 
-  def set_link_to_show(pokedex)
-    @context.helpers.link_to pokedex.name, pokedex
+  def set_link_to_show(skill)
+    @context.helpers.link_to skill.name, skill
   end
 
-  def set_link_to_edit(pokedex)
-    @context.helpers.link_to 'Edit', edit_pokedex_path(pokedex), class: 'btn btn-default btn-remove'
+  def set_link_to_edit(skill)
+    @context.helpers.link_to 'Edit', edit_skill_path(skill), class: 'btn btn-default btn-remove'
   end
 
-  def set_link_to_remove(pokedex)
-    @context.helpers.link_to 'Remove', pokedex, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+  def set_link_to_remove(skill)
+    @context.helpers.link_to 'Remove', skill, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
   end
 end

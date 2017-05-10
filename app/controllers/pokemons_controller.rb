@@ -4,14 +4,21 @@ class PokemonsController < ApplicationController
   # GET /pokemons
   # GET /pokemons.json
   def index
-    @pokemons = Pokemon.all
+    decorator = PokemonDecorator.new(self)
+    @decorated_pokemons = decorator.decorate_for_index(Pokemon.all)
   end
 
   # GET /pokemons/1
   # GET /pokemons/1.json
   def show
-    @pokemon = Pokemon.find(params[:id])
-    @pokemon_skills = @pokemon.pokemon_skills
+    pokemon = Pokemon.find(params[:id])
+
+    decorator = PokemonDecorator.new(self)
+    @decorated_pokemon = decorator.decorate_for_show(pokemon)
+
+    decorator_pokemon_skill = PokemonSkillDecorator.new(self)
+    @decorated_pokemon_skills = decorator_pokemon_skill.decorate_for_index(pokemon.pokemon_skills)
+
     @pokemon_skill = PokemonSkill.new
   end
 

@@ -16,15 +16,15 @@
         <th>Current Experience</th>
         <th>Pokemon Image</th>
       </tr>
-      <% @pokemons.each do |f| %>
+      <% @decorated_pokemons.each do |f| %>
       <tr>
-        <td class="col-md-1"><%=link_to f.name, f%> </td>
+        <td class="col-md-1"><%= f.link_to_show%> </td>
         <td class="col-md-1"><%= f.level %></td>
         <td class="col-md-1"><%= f.current_health_point%> / <%= f.max_health_point%></td>
         <td class="col-md-1"><%= f.attack %></td>
         <td class="col-md-1"><%= f.defence %></td>
         <td class="col-md-1"><%= f.speed %></td>
-        <td class="col-md-1"><%= Pokedex.find(f.pokedex_id).element_type%></td>
+        <td class="col-md-1"><%= f.element_type%></td>
         <td class="col-md-1"><%= f.current_experience %></td>
         <td class="col-md-1"><%= image_tag Pokedex.find(f.pokedex_id).image_url, :class => "pokemon_icon" %></td>
 
