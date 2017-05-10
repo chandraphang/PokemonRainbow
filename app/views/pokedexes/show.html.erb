@@ -1,45 +1,43 @@
 <div class="container">
-<div class="title-bar">
-<h1 class="title">Pokedex</h1>
-</div>
-<div class ="padding">
-<div class="new_block add-pokemon-skill">
+  <div class="title-bar">
+    <h1 class="title">Pokedex</h1>
+  </div>
+  <div class ="padding">
+    <div class="new_block add-pokemon-skill">
+      <%= @decorated_pokedex.link_to_edit %>
+      <%= @decorated_pokedex.link_to_remove %>
+    </div>
+    <div class="col-md-4">
+      <%= @decorated_pokedex.image %>
+    </div>
 
-<%= link_to 'Back', pokedexes_path, class: "btn btn-default btn-remove" %>
-<%= link_to 'Edit', edit_pokedex_path(@pokedex), class: "btn btn-default btn-remove" %>
-<%= link_to "Remove", @pokedex, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
-</div>
-<div class="col-md-4">
-<%= image_tag @pokedex.image_url, :alt => 'product_image' %>
-</div>
-
-<div class="col-md-6">
-<table class="table table-bordered">
-<tr>
-  <th class="col-md-2">Name</th>
-  <td class="col-md-2"><%=link_to @pokedex.name, @pokedex%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Base HP</th>
-  <td class="col-md-2"><%=@pokedex.base_health_point%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Base Attack</th>
-  <td class="col-md-2"><%=@pokedex.base_attack%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Base Defence</th>
-  <td class="col-md-2"><%=@pokedex.base_defence%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Base Speed</th>
-  <td class="col-md-2"><%=@pokedex.base_speed%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Element Type</th>
-  <td class="col-md-2"><%=@pokedex.element_type%> </td>
-</tr>
-</table>
-</div>
-</div>
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <tr>
+          <th class="col-md-2">Name</th>
+          <td class="col-md-2"><%= @decorated_pokedex.name %></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Base HP</th>
+          <td class="col-md-2"><%=@decorated_pokedex.base_health_point%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Base Attack</th>
+          <td class="col-md-2"><%=@decorated_pokedex.base_attack%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Base Defence</th>
+          <td class="col-md-2"><%=@decorated_pokedex.base_defence%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Base Speed</th>
+          <td class="col-md-2"><%=@decorated_pokedex.base_speed%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Element Type</th>
+          <td class="col-md-2"><%=@decorated_pokedex.element_type%> </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

@@ -3,33 +3,33 @@
     <h1 class="title">Pokemons</h1>
   </div>
   <div class ="padding">
-<%= button_to "Create Pokemon", new_pokemon_path, :method => "get", class:"btn btn-default" , id:"custom-btn"%>
-<table class="table table-bordered">
-<tr>
-    <th>Name</th>
-    <th>Level</th>
-    <th>HP</th>
-    <th>Attack</th>
-    <th>Defence</th>
-    <th>Speed</th>
-    <th>Type</th>
-    <th>Current Experience</th>
-    <th>Pokemon Image</th>
-</tr>
-<% @pokemons.each do |f| %>
-<tr>
-  <td class="col-md-1"><%=link_to f.name, f%> </td>
-  <td class="col-md-1"><%= f.level %></td>
-  <td class="col-md-1"><%= f.current_health_point%> / <%= f.max_health_point%></td>
-  <td class="col-md-1"><%= f.attack %></td>
-  <td class="col-md-1"><%= f.defence %></td>
-  <td class="col-md-1"><%= f.speed %></td>
-  <td class="col-md-1"><%= Pokedex.find(f.pokedex_id).element_type%></td>
-  <td class="col-md-1"><%= f.current_experience %></td>
-  <td class="col-md-1"><%= image_tag Pokedex.find(f.pokedex_id).image_url, :class => "pokemon_icon" %></td>
+    <%= button_to "Create Pokemon", new_pokemon_path, :method => "get", class:"btn btn-default" , id:"custom-btn"%>
+    <table class="table table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>Level</th>
+        <th>HP</th>
+        <th>Attack</th>
+        <th>Defence</th>
+        <th>Speed</th>
+        <th>Type</th>
+        <th>Current Experience</th>
+        <th>Pokemon Image</th>
+      </tr>
+      <% @pokemons.each do |f| %>
+      <tr>
+        <td class="col-md-1"><%=link_to f.name, f%> </td>
+        <td class="col-md-1"><%= f.level %></td>
+        <td class="col-md-1"><%= f.current_health_point%> / <%= f.max_health_point%></td>
+        <td class="col-md-1"><%= f.attack %></td>
+        <td class="col-md-1"><%= f.defence %></td>
+        <td class="col-md-1"><%= f.speed %></td>
+        <td class="col-md-1"><%= Pokedex.find(f.pokedex_id).element_type%></td>
+        <td class="col-md-1"><%= f.current_experience %></td>
+        <td class="col-md-1"><%= image_tag Pokedex.find(f.pokedex_id).image_url, :class => "pokemon_icon" %></td>
 
- </tr>
-<% end %>
-</table>
-</div>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>

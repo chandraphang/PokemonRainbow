@@ -1,126 +1,126 @@
 <%= form_for(pokemon) do |f| %>
-  <% if pokemon.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(pokemon.errors.count, "error") %> prohibited this pokemon from being saved:</h2>
+<% if pokemon.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(pokemon.errors.count, "error") %> prohibited this pokemon from being saved:</h2>
 
-      <ul>
-      <% pokemon.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% pokemon.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :name%>
-     <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
-     <% if !@pokemon.errors[:name].blank?%>
-     <li class="error_text">
+<div class="row control-group">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :name%>
+   <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
+   <% if !@pokemon.errors[:name].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:name).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
 <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :Pokedex%>
-     <%= f.select("pokedex_id", Pokedex.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
-     <% if !@pokemon.errors[:pokedex_id].blank?%>
-     <li class="error_text">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :Pokedex%>
+   <%= f.select("pokedex_id", Pokedex.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+   <% if !@pokemon.errors[:pokedex_id].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:pokedex_id).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
 <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :level%>
-     <%= f.text_field :level, class:"form-control", placeholder: "Level"%>
-     <% if !@pokemon.errors[:level].blank?%>
-     <li class="error_text">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :level%>
+   <%= f.text_field :level, class:"form-control", placeholder: "Level"%>
+   <% if !@pokemon.errors[:level].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:level).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
 <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :max_health_point%>
-     <%= f.text_field :max_health_point, class:"form-control", placeholder: "Max Health Point"%>
-     <% if !@pokemon.errors[:max_health_point].blank?%>
-     <li class="error_text">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :max_health_point%>
+   <%= f.text_field :max_health_point, class:"form-control", placeholder: "Max Health Point"%>
+   <% if !@pokemon.errors[:max_health_point].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:max_health_point).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
- <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :current_health_point%>
-     <%= f.text_field :current_health_point, class:"form-control", placeholder: "Current Health Point"%>
-     <% if !@pokemon.errors[:current_health_point].blank?%>
-     <li class="error_text">
+<div class="row control-group">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :current_health_point%>
+   <%= f.text_field :current_health_point, class:"form-control", placeholder: "Current Health Point"%>
+   <% if !@pokemon.errors[:current_health_point].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:current_health_point).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
 <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :attack%>
-     <%= f.text_field :attack, class:"form-control", placeholder: "Attack"%>
-     <% if !@pokemon.errors[:attack].blank?%>
-     <li class="error_text">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :attack%>
+   <%= f.text_field :attack, class:"form-control", placeholder: "Attack"%>
+   <% if !@pokemon.errors[:attack].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:attack).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
 <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :defence%>
-     <%= f.text_field :defence, class:"form-control", placeholder: "Defence"%>
-     <% if !@pokemon.errors[:defence].blank?%>
-     <li class="error_text">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :defence%>
+   <%= f.text_field :defence, class:"form-control", placeholder: "Defence"%>
+   <% if !@pokemon.errors[:defence].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:defence).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
- <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :speed%>
-     <%= f.text_field :speed, class:"form-control", placeholder: "Speed"%>
-     <% if !@pokemon.errors[:speed].blank?%>
-     <li class="error_text">
+<div class="row control-group">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :speed%>
+   <%= f.text_field :speed, class:"form-control", placeholder: "Speed"%>
+   <% if !@pokemon.errors[:speed].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:speed).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
- <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :current_experience%>
-     <%= f.text_field :current_experience, class:"form-control", placeholder: "Current Experience"%>
-     <% if !@pokemon.errors[:current_experience].blank?%>
-     <li class="error_text">
+<div class="row control-group">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :current_experience%>
+   <%= f.text_field :current_experience, class:"form-control", placeholder: "Current Experience"%>
+   <% if !@pokemon.errors[:current_experience].blank?%>
+   <li class="error_text">
      <%= @pokemon.errors.full_messages_for(:current_experience).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
  </div>
+</div>
 
 
-  <div class="actions form text-center">
-    <%= f.button :submit => "", class:"btn btn-default center-block" %>
-  </div>
+<div class="actions form text-center">
+  <%= f.button :submit => "", class:"btn btn-default center-block" %>
+</div>
 <% end %>

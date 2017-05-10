@@ -4,12 +4,15 @@ class SkillsController < ApplicationController
   # GET /skills
   # GET /skills.json
   def index
-    @skills = Skill.all
+    decorator = SkillDecorator.new(self)
+    @decorated_skills = decorator.decorate_for_index(Skill.all)
   end
 
   # GET /skills/1
   # GET /skills/1.json
   def show
+    decorator = SkillDecorator.new(self)
+    @decorated_skill = decorator.decorate_for_show(Skill.find(params[:id]))
   end
 
   # GET /skills/new

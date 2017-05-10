@@ -1,43 +1,43 @@
 <%= form_for(pokemon_battle) do |f| %>
-  <% if pokemon_battle.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(pokemon_battle.errors.count, "error") %> prohibited this pokemon_battle from being saved:</h2>
+<% if pokemon_battle.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(pokemon_battle.errors.count, "error") %> prohibited this pokemon_battle from being saved:</h2>
 
-      <ul>
-      <% pokemon_battle.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% pokemon_battle.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-    <div class="row control-group">
-   <div class="form-group col-xs-4 floating-label-form-group controls">
-     <%= f.label :Pokemon1_id%>
-     <%= f.select("pokemon1_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
-     <% if !@pokemon_battle.errors[:pokemon1_id].blank?%>
-     <li class="error_text">
+<div class="row control-group">
+ <div class="form-group col-xs-4 floating-label-form-group controls">
+   <%= f.label :Pokemon1_id%>
+   <%= f.select("pokemon1_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+   <% if !@pokemon_battle.errors[:pokemon1_id].blank?%>
+   <li class="error_text">
      <%= @pokemon_battle.errors.full_messages_for(:pokemon1_id).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
+ </div>
 
-   <div class="form-group col-xs-4 floating-label-form-group controls">
+ <div class="form-group col-xs-4 floating-label-form-group controls">
    <h3 class="text-center">VS</h3>
-   </div>
+ </div>
 
-   <div class="form-group col-xs-4 floating-label-form-group controls">
-     <%= f.label :Pokemon2_id%>
-     <%= f.select("pokemon2_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
-     <% if !@pokemon_battle.errors[:pokemon2_id].blank?%>
-     <li class="error_text">
+ <div class="form-group col-xs-4 floating-label-form-group controls">
+   <%= f.label :Pokemon2_id%>
+   <%= f.select("pokemon2_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+   <% if !@pokemon_battle.errors[:pokemon2_id].blank?%>
+   <li class="error_text">
      <%= @pokemon_battle.errors.full_messages_for(:pokemon2_id).join(', ') %>
-     </li>
-     <% end %>
-   </div>
+   </li>
+   <% end %>
+ </div>
 
 </div>
-  <div class="actions form text-center">
+<div class="actions form text-center">
   <%= f.button :submit => "", class:"btn btn-default center-block" %>
 </div>
 <% end %>

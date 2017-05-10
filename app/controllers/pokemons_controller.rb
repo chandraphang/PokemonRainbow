@@ -20,10 +20,7 @@ class PokemonsController < ApplicationController
     @pokemon_skill = PokemonSkill.new
     @pokemon_skill.pokemon_id =  params[:pokemon_id]
     @pokemon_skill.skill_id = params[:pokemon_skill][:skill_id]
-
     @pokemon_skill.current_pp = Skill.find(params[:pokemon_skill][:skill_id]).max_pp
-
-
 
     respond_to do |format|
     if @pokemon_skill.save

@@ -1,15 +1,18 @@
 class PokedexesController < ApplicationController
-  before_action :set_pokedex, only: [:show, :edit, :update, :destroy]
+  before_action :set_pokedex, only: [:edit, :update, :destroy]
 
   # GET /pokedexes
   # GET /pokedexes.json
   def index
-    @pokedexes = Pokedex.all
+    decorator = PokedexDecorator.new(self)
+    @decorated_pokedexes = decorator.decorate_for_index(Pokedex.all)
   end
 
   # GET /pokedexes/1
   # GET /pokedexes/1.json
   def show
+    decorator = PokedexDecorator.new(self)
+    @decorated_pokedex = decorator.decorate_for_show(Pokedex.find(params[:id]))
   end
 
   # GET /pokedexes/new

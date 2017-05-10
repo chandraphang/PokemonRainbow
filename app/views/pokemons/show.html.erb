@@ -1,101 +1,101 @@
 <div class="container">
-<div class="title-bar">
-<h1 class="title">Pokemon</h1>
-</div>
-<div class ="padding">
-<div class="new_block add-pokemon-skill">
-<%= link_to 'Back', pokemons_path, class: "btn btn-default btn-remove" %>
-<%= link_to 'Edit', edit_pokemon_path(@pokemon), class: "btn btn-default btn-remove" %>
-<%= link_to "Remove", @pokemon, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
-
-</div>
-<div class="col-md-4">
-<%= image_tag Pokedex.find(@pokemon.pokedex_id).image_url, :alt => 'product_image' %>
-</div>
-
-<div class="col-md-6">
-<table class="table table-bordered">
-<tr>
-  <th class="col-md-2">Name</th>
-  <td class="col-md-2"><%=link_to @pokemon.name, @pokemon%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Level</th>
-  <td class="col-md-2"><%=@pokemon.level%></td>
-</tr>
-<tr>
-  <th class="col-md-2">HP</th>
-  <td class="col-md-2"><%=@pokemon.current_health_point%> / <%=@pokemon.max_health_point%></td>
-</tr>
-<tr>
-  <th class="col-md-2">Attack</th>
-  <td class="col-md-2"><%=@pokemon.attack%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Defence</th>
-  <td class="col-md-2"><%=@pokemon.defence%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Speed</th>
-  <td class="col-md-2"><%=@pokemon.speed%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Current Experience</th>
-  <td class="col-md-2"><%=@pokemon.current_experience%> </td>
-</tr>
-<tr>
-  <th class="col-md-2">Type</th>
-  <td class="col-md-2"><%= Pokedex.find(@pokemon.pokedex_id).element_type%> </td>
-</tr>
-</table>
-</div>
-
-<div class="new_block add-pokemon-skill">
-  <h2>Skill List</h2>
+  <div class="title-bar">
+    <h1 class="title">Pokemon</h1>
   </div>
+  <div class ="padding">
+    <div class="new_block add-pokemon-skill">
+      <%= link_to 'Back', pokemons_path, class: "btn btn-default btn-remove" %>
+      <%= link_to 'Edit', edit_pokemon_path(@pokemon), class: "btn btn-default btn-remove" %>
+      <%= link_to "Remove", @pokemon, :method => "delete", data: {confirm: "Are you sure you want to delete it?"}, class: "btn btn-default btn-remove" %>
 
-<table class="table table-bordered">
-<tr>
-  <th>Name</th>
-  <th>PP</th>
-  <th>Power</th>
-  <th>Element Type</th>
-  <th>Action</th>
-</tr>
-<% @pokemon.pokemon_skills.each do |f| %>
-<tr>
-  <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, skill_path(f.skill_id)%> </td>
-  <td class="col-md-2"><%= f.current_pp %> / <%= Skill.find(f.skill_id).max_pp %></td>
-<td class="col-md-2"><%= Skill.find(f.skill_id).power %></td>
-<td class="col-md-2"><%= Skill.find(f.skill_id).element_type %></td>
-<td class="col-md-2"><%= link_to "Remove", pokemon_delete_pokemon_skill_path(@pokemon.id, f.skill_id), class: "btn btn-default", method: :post, data: {confirm: "Are you sure you want to delete it?"} %></td>
- </tr>
-<% end %>
-</table>
+    </div>
+    <div class="col-md-4">
+      <%= image_tag Pokedex.find(@pokemon.pokedex_id).image_url, :alt => 'product_image' %>
+    </div>
 
-<%= form_for(@pokemon_skill, url: pokemon_create_pokemon_skill_path(@pokemon.id)) do |f| %>
-  <div class="new_block add-pokemon-skill">
-  <h2>Add New Skill</h2>
-  </div>
-  <div class="row control-group">
-   <div class="form-group col-xs-12 floating-label-form-group controls">
-     <%= f.label :Skill%>
-     <%= f.select("skill_id", Skill.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
-     <% @pokemon_skill.errors.full_messages.each do |message| %>
-        <li class="error_text"><%= message %></li>
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <tr>
+          <th class="col-md-2">Name</th>
+          <td class="col-md-2"><%=link_to @pokemon.name, @pokemon%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Level</th>
+          <td class="col-md-2"><%=@pokemon.level%></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">HP</th>
+          <td class="col-md-2"><%=@pokemon.current_health_point%> / <%=@pokemon.max_health_point%></td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Attack</th>
+          <td class="col-md-2"><%=@pokemon.attack%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Defence</th>
+          <td class="col-md-2"><%=@pokemon.defence%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Speed</th>
+          <td class="col-md-2"><%=@pokemon.speed%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Current Experience</th>
+          <td class="col-md-2"><%=@pokemon.current_experience%> </td>
+        </tr>
+        <tr>
+          <th class="col-md-2">Type</th>
+          <td class="col-md-2"><%= Pokedex.find(@pokemon.pokedex_id).element_type%> </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="new_block add-pokemon-skill">
+      <h2>Skill List</h2>
+    </div>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>PP</th>
+        <th>Power</th>
+        <th>Element Type</th>
+        <th>Action</th>
+      </tr>
+      <% @pokemon.pokemon_skills.each do |f| %>
+      <tr>
+        <td class="col-md-2"><%=link_to Skill.find(f.skill_id).name, skill_path(f.skill_id)%> </td>
+        <td class="col-md-2"><%= f.current_pp %> / <%= Skill.find(f.skill_id).max_pp %></td>
+        <td class="col-md-2"><%= Skill.find(f.skill_id).power %></td>
+        <td class="col-md-2"><%= Skill.find(f.skill_id).element_type %></td>
+        <td class="col-md-2"><%= link_to "Remove", pokemon_delete_pokemon_skill_path(@pokemon.id, f.skill_id), class: "btn btn-default", method: :post, data: {confirm: "Are you sure you want to delete it?"} %></td>
+      </tr>
       <% end %>
+    </table>
 
+    <%= form_for(@pokemon_skill, url: pokemon_create_pokemon_skill_path(@pokemon.id)) do |f| %>
+    <div class="new_block add-pokemon-skill">
+      <h2>Add New Skill</h2>
+    </div>
+    <div class="row control-group">
+     <div class="form-group col-xs-12 floating-label-form-group controls">
+       <%= f.label :Skill%>
+       <%= f.select("skill_id", Skill.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+       <% @pokemon_skill.errors.full_messages.each do |message| %>
+       <li class="error_text"><%= message %></li>
+       <% end %>
+
+     </div>
    </div>
- </div>
 
-  <div class="actions form">
+   <div class="actions form">
     <%= f.button :submit => "Submit", class:"btn btn-default" %>
   </div>
-<% end %>
+  <% end %>
 
 </div>
 
- </div>
+</div>
 
 
 

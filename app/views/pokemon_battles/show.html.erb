@@ -1,45 +1,43 @@
 <div class="container">
-<div class="title-bar">
-<h1 class="title">New Pokemon Battle</h1>
-</div>
-<div class ="padding">
-<div class="new_block add-pokemon-skill">
-<h1 class="text-center">Battle</h1>
-<%= link_to 'Back', pokemon_battles_path, class: "btn btn-default btn-remove" %>
-<%= link_to 'Edit', edit_pokemon_battle_path(@pokemon_battle), class: "btn btn-default btn-remove" %>
-<div class="row control-group">
-   <div class="form-group col-xs-4 floating-label-form-group controls">
-     <h3 class="text-center">Pokemon 1</h3>
-     <%= image_tag Pokedex.find(Pokemon.find(@pokemon_battle.pokemon1_id).pokedex_id).image_url, :alt => 'pokemon_image', :class => "img-center" %>
-     <div class ="padding-battle-details">
-     <h5>Name : <%=Pokemon.find(@pokemon_battle.pokemon1_id).name%></h5>
-     <h5>HP : <%=Pokemon.find(@pokemon_battle.pokemon1_id).current_health_point%> / <%=@pokemon_battle.pokemon1_max_health_point%></h5>
-     <h5>Skill : </h5>
-    <%= select("Pokemon_Battle", "Attack", PokemonSkill.where(pokemon_id: @pokemon_battle.pokemon1_id).map {|f| Skill.find(f.skill_id).name }, { include_blank: false }, {:class => "form-control"}) %>
+  <div class="title-bar">
+    <h1 class="title">New Pokemon Battle</h1>
+  </div>
+
+  <div class ="padding">
+    <div class="new_block add-pokemon-skill">
+      <h1 class="text-center">Battle</h1>
+      <%= link_to 'Back', pokemon_battles_path, class: "btn btn-default btn-remove" %>
+      <%= link_to 'Edit', edit_pokemon_battle_path(@pokemon_battle), class: "btn btn-default btn-remove" %>
+      <div class="row control-group">
+       <div class="form-group col-xs-4 floating-label-form-group controls">
+         <h3 class="text-center">Pokemon 1</h3>
+         <%= image_tag Pokedex.find(Pokemon.find(@pokemon_battle.pokemon1_id).pokedex_id).image_url, :alt => 'pokemon_image', :class => "img-center" %>
+         <div class ="padding-battle-details">
+           <h5>Name : <%=Pokemon.find(@pokemon_battle.pokemon1_id).name%></h5>
+           <h5>HP : <%=Pokemon.find(@pokemon_battle.pokemon1_id).current_health_point%> / <%=@pokemon_battle.pokemon1_max_health_point%></h5>
+           <h5>Skill : </h5>
+           <%= select("Pokemon_Battle", "Attack", PokemonSkill.where(pokemon_id: @pokemon_battle.pokemon1_id).map {|f| Skill.find(f.skill_id).name }, { include_blank: false }, {:class => "form-control"}) %>
+         </div>
+       </div>
+
+       <div class="form-group col-xs-4 floating-label-form-group controls">
+         <h1 class="text-center">VS</h1>
+       </div>
+
+       <div class="form-group col-xs-4 floating-label-form-group controls">
+         <h3 class="text-center">Pokemon 2</h3>
+         <%= image_tag Pokedex.find(Pokemon.find(@pokemon_battle.pokemon2_id).pokedex_id).image_url, :alt => 'pokemon_image', :class => "img-center" %>
+         <div class ="padding-battle-details">
+           <h5>Name : <%=Pokemon.find(@pokemon_battle.pokemon2_id).name%></h5>
+           <h5>HP : <%=Pokemon.find(@pokemon_battle.pokemon2_id).current_health_point%> / <%=@pokemon_battle.pokemon2_max_health_point%></h5>
+
+           <h5>Skill : </h5>
+           <%= select("Pokemon_Battle", "Attack", PokemonSkill.where(pokemon_id: @pokemon_battle.pokemon2_id).map {|f| Skill.find(f.skill_id).name }, { include_blank: false }, {:class => "form-control"})%>
+         </div>
+       </div>
+
      </div>
-
-
    </div>
-
-   <div class="form-group col-xs-4 floating-label-form-group controls">
-   <h1 class="text-center">VS</h1>
-   </div>
-
-   <div class="form-group col-xs-4 floating-label-form-group controls">
-     <h3 class="text-center">Pokemon 2</h3>
-     <%= image_tag Pokedex.find(Pokemon.find(@pokemon_battle.pokemon2_id).pokedex_id).image_url, :alt => 'pokemon_image', :class => "img-center" %>
-     <div class ="padding-battle-details">
-     <h5>Name : <%=Pokemon.find(@pokemon_battle.pokemon2_id).name%></h5>
-     <h5>HP : <%=Pokemon.find(@pokemon_battle.pokemon2_id).current_health_point%> / <%=@pokemon_battle.pokemon2_max_health_point%></h5>
-
-     <h5>Skill : </h5>
-     <%= select("Pokemon_Battle", "Attack", PokemonSkill.where(pokemon_id: @pokemon_battle.pokemon2_id).map {|f| Skill.find(f.skill_id).name }, { include_blank: false }, {:class => "form-control"})%>
-
-     </div>
-   </div>
-
-</div>
-</div>
-</div>
+ </div>
 </div>
 
