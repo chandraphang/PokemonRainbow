@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170509081105) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name",         null: false
-    t.string   "power",        null: false
+    t.integer  "power",        null: false
     t.integer  "max_pp",       null: false
     t.string   "element_type", null: false
     t.datetime "created_at",   null: false
