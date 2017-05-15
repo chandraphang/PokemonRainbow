@@ -20,6 +20,13 @@ class PokemonBattleCalculator
     :fairy => {:normal => 1, :fight => 2, :flying => 1, :poison => 0.5, :ground => 1, :rock => 1, :bug => 1, :ghost => 1, :steel => 0.5, :fire =>0.5, :water => 1, :grass => 1, :electric => 1, :psychic => 1, :ice => 1, :dragon => 2, :dark => 2, :fairy => 1}
   }
 
+  ExtraStats = Struct.new(
+        :health_point,
+        :attack_point,
+        :defence_point,
+        :speed_point
+    )
+
   def self.calculate_damage(attacker, defender, skill)
     damage = 0
     random_number = rand(85..100)
@@ -31,4 +38,31 @@ class PokemonBattleCalculator
     damage = (((((2*attacker.level/5+2)*attacker.attack*skill.power/defender.defence)/50)+2)*stab*weakness*(random_number.to_f/100)).round
 
   end
+
+  def self.calculate_experience(loser_level)
+    rand(20..150) * loser_level
+  end
+
+  def self.level_up?(winner_level, total_experience)
+    experience_limit = winner_level * 250
+    if total_experience > experience_limit
+        true
+    else
+        false
+    end
+  end
+
+
+  def self.calculate_level_up_extra_stats
+
+    extra = ExtraStats.new
+    extra.health_point = rand(10..20)
+    extra.attack_point = rand(1..5)
+    extra.defence_point = rand(1..5)
+    extra.speed_point = rand(1..5)
+    extra
+  end
+
+
+
 end
