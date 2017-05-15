@@ -14,7 +14,7 @@
 <div class="row control-group">
  <div class="form-group col-xs-4 floating-label-form-group controls">
    <%= f.label :Pokemon1_id%>
-   <%= f.select("pokemon1_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+   <%= f.select("pokemon1_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: '-- Please Select Pokemon Below --' }, {:class => "form-control"})%>
    <% if !@pokemon_battle.errors[:pokemon1_id].blank?%>
    <li class="error_text">
      <%= @pokemon_battle.errors.full_messages_for(:pokemon1_id).join(', ') %>
@@ -28,7 +28,7 @@
 
  <div class="form-group col-xs-4 floating-label-form-group controls">
    <%= f.label :Pokemon2_id%>
-   <%= f.select("pokemon2_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+   <%= f.select("pokemon2_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: '-- Please Select Pokemon Below --' }, {:class => "form-control"})%>
    <% if !@pokemon_battle.errors[:pokemon2_id].blank?%>
    <li class="error_text">
      <%= @pokemon_battle.errors.full_messages_for(:pokemon2_id).join(', ') %>

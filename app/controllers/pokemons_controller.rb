@@ -23,18 +23,20 @@ class PokemonsController < ApplicationController
   end
 
   def create_pokemon_skill
+
     pokemon = Pokemon.find(params[:pokemon_id])
     @pokemon_skill = PokemonSkill.new
     @pokemon_skill.pokemon_id =  params[:pokemon_id]
     @pokemon_skill.skill_id = params[:pokemon_skill][:skill_id]
-    @pokemon_skill.current_pp = Skill.find(params[:pokemon_skill][:skill_id]).max_pp
+    if params[:pokemon_skill][:skill_id].present?
+      @pokemon_skill.current_pp = Skill.find(params[:pokemon_skill][:skill_id]).max_pp
+    end
 
     decorator = PokemonDecorator.new(self)
     @decorated_pokemon = decorator.decorate_for_show(pokemon)
 
     decorator_pokemon_skill = PokemonSkillDecorator.new(self)
     @decorated_pokemon_skills = decorator_pokemon_skill.decorate_for_index(pokemon.pokemon_skills)
-
     respond_to do |format|
     if @pokemon_skill.save
         format.html { redirect_to pokemon, notice: 'Skill was successfully added.' }
@@ -68,13 +70,17 @@ class PokemonsController < ApplicationController
   # POST /pokemons
   # POST /pokemons.json
   def create
+
     @pokemon = Pokemon.new(pokemon_params)
     @pokemon.level = 1
-    @pokemon.max_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
-    @pokemon.current_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
-    @pokemon.attack = Pokedex.find(pokemon_params[:pokedex_id]).base_attack
-    @pokemon.defence = Pokedex.find(pokemon_params[:pokedex_id]).base_defence
-    @pokemon.speed = Pokedex.find(pokemon_params[:pokedex_id]).base_speed
+    if pokemon_params[:pokedex_id].present?
+
+      @pokemon.max_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
+      @pokemon.current_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
+      @pokemon.attack = Pokedex.find(pokemon_params[:pokedex_id]).base_attack
+      @pokemon.defence = Pokedex.find(pokemon_params[:pokedex_id]).base_defence
+      @pokemon.speed = Pokedex.find(pokemon_params[:pokedex_id]).base_speed
+    end
     @pokemon.current_experience = 0
     respond_to do |format|
       if @pokemon.save

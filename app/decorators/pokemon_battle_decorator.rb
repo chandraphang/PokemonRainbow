@@ -4,6 +4,8 @@ class PokemonBattleDecorator
   include ActionView::Helpers::UrlHelper
 
   DecoratorResult = Struct.new(
+    :pokemon1_id,
+    :pokemon2_id,
     :pokemon1,
     :pokemon2,
     :current_turn,
@@ -45,6 +47,9 @@ class PokemonBattleDecorator
     if pokemon_battle.present?
 
       result = DecoratorResult.new
+
+      result.pokemon1_id = pokemon_battle.pokemon1_id
+      result.pokemon2_id = pokemon_battle.pokemon2_id
       result.pokemon1 = set_pokemon_name(pokemon_battle.pokemon1)
       result.pokemon2 = set_pokemon_name(pokemon_battle.pokemon2)
       result.current_turn = pokemon_battle.current_turn

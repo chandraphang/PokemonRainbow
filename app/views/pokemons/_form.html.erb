@@ -14,12 +14,12 @@
   <div class="row control-group">
    <div class="form-group col-xs-12 floating-label-form-group controls">
      <%= f.label :Pokedex%>
-     <%= f.select("pokedex_id", Pokedex.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
-     <% if !@pokemon.errors[:pokedex_id].blank?%>
+     <%= f.select("pokedex_id", Pokedex.all.collect {|p| [ p.name, p.id ] }, { include_blank: '-- Please Select Pokedex Below --' }, {:class => "form-control"})%>
+
      <li class="error_text">
-     <%= @pokemon.errors.full_messages_for(:pokedex_id).join(', ') %>
+     <%= @pokemon.errors.full_messages_for(:pokedex).join(', ') %>
      </li>
-     <% end %>
+
    </div>
  </div>
 

@@ -81,7 +81,7 @@
     <div class="row control-group">
      <div class="form-group col-xs-12 floating-label-form-group controls">
        <%= f.label :Skill%>
-       <%= f.select("skill_id", Skill.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }, {:class => "form-control"})%>
+       <%= f.select("skill_id", Skill.all.collect {|p| [ p.name, p.id ] }, { include_blank: '-- Please Select Skill Below --' }, {:class => "form-control"})%>
        <% @pokemon_skill.errors.full_messages.each do |message| %>
        <li class="error_text"><%= message %></li>
        <% end %>
