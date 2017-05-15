@@ -75,11 +75,11 @@ class PokemonsController < ApplicationController
     @pokemon.level = 1
     if pokemon_params[:pokedex_id].present?
 
-      @pokemon.max_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
-      @pokemon.current_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
-      @pokemon.attack = Pokedex.find(pokemon_params[:pokedex_id]).base_attack
-      @pokemon.defence = Pokedex.find(pokemon_params[:pokedex_id]).base_defence
-      @pokemon.speed = Pokedex.find(pokemon_params[:pokedex_id]).base_speed
+    @pokemon.max_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
+    @pokemon.current_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
+    @pokemon.attack = Pokedex.find(pokemon_params[:pokedex_id]).base_attack
+    @pokemon.defence = Pokedex.find(pokemon_params[:pokedex_id]).base_defence
+    @pokemon.speed = Pokedex.find(pokemon_params[:pokedex_id]).base_speed
     end
     @pokemon.current_experience = 0
     respond_to do |format|

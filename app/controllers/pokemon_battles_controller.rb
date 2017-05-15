@@ -31,6 +31,19 @@ class PokemonBattlesController < ApplicationController
           @pokemon_battle.pokemon_winner_id = pokemon_attacker.id
           @pokemon_battle.pokemon_loser_id = pokemon_defender.id
           @pokemon_battle.state = "Finish"
+
+          pokemon_attacker.current_experience += PokemonBattleCalculator.calculate_experience(pokemon_defender.level)
+          if PokemonBattleCalculator.level_up?(pokemon_attacker.level, pokemon_attacker.current_experience)
+            pokemon_attacker.level += 1
+            stats = PokemonBattleCalculator.calculate_level_up_extra_stats
+            pokemon_attacker.max_health_point += stats.health_point
+            pokemon_attacker.attack += stats.attack_point
+            pokemon_attacker.defence += stats.defence_point
+            pokemon_attacker.speed += stats.speed_point
+
+          end
+
+
         else
           pokemon_defender.current_health_point -= attack
         end
@@ -41,7 +54,9 @@ class PokemonBattlesController < ApplicationController
           pokemon_skill.current_pp -= 1
           @pokemon_battle.current_turn += 1
           pokemon_defender.save
+          pokemon_attacker.save
           pokemon_skill.save
+
 
           respond_to do |format|
             if @pokemon_battle.save
@@ -85,6 +100,17 @@ class PokemonBattlesController < ApplicationController
     @pokemon_battle.pokemon_winner_id = pokemon_defender.id
     @pokemon_battle.state = "Finish"
 
+    pokemon_defender.current_experience += PokemonBattleCalculator.calculate_experience(pokemon_attacker.level)
+    if PokemonBattleCalculator.level_up?(pokemon_defender.level, pokemon_defender.current_experience)
+      pokemon_defender.level += 1
+      stats = PokemonBattleCalculator.calculate_level_up_extra_stats
+      pokemon_defender.max_health_point += stats.health_point
+      pokemon_defender.attack += stats.attack_point
+      pokemon_defender.defence += stats.defence_point
+      pokemon_defender.speed += stats.speed_point
+
+    end
+    pokemon_defender.save
     respond_to do |format|
             if @pokemon_battle.save
               format.html { redirect_to @pokemon_battle, notice: 'Pokemon battle was successfully created.' }
