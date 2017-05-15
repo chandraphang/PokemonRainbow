@@ -18,108 +18,35 @@ class PokemonBattlesController < ApplicationController
 
   def attack
     @pokemon_battle = PokemonBattle.find(params[:pokemon_battle_id])
-    if params[:skill].present?
-      pokemon_attacker = Pokemon.find(params[:pokemon_attacker])
-      pokemon_defender = Pokemon.find(params[:pokemon_defender])
-      skill = Skill.where(name: params[:skill]).first
-      if pokemon_defender.current_health_point > 0
-        attack = PokemonBattleCalculator.calculate_damage(pokemon_attacker, pokemon_defender, skill)
-        remaining_health_point = pokemon_defender.current_health_point - attack
-
-        if remaining_health_point <= 0
-          pokemon_defender.current_health_point = 0
-          @pokemon_battle.pokemon_winner_id = pokemon_attacker.id
-          @pokemon_battle.pokemon_loser_id = pokemon_defender.id
-          @pokemon_battle.state = "Finish"
-
-          pokemon_attacker.current_experience += PokemonBattleCalculator.calculate_experience(pokemon_defender.level)
-          if PokemonBattleCalculator.level_up?(pokemon_attacker.level, pokemon_attacker.current_experience)
-            pokemon_attacker.level += 1
-            stats = PokemonBattleCalculator.calculate_level_up_extra_stats
-            pokemon_attacker.max_health_point += stats.health_point
-            pokemon_attacker.attack += stats.attack_point
-            pokemon_attacker.defence += stats.defence_point
-            pokemon_attacker.speed += stats.speed_point
-
-          end
-
-
-        else
-          pokemon_defender.current_health_point -= attack
-        end
-
-        pokemon_skill = PokemonSkill.where(pokemon_id: params[:pokemon_attacker], skill_id: skill.id).first
-
-        if pokemon_skill.current_pp > 0
-          pokemon_skill.current_pp -= 1
-          @pokemon_battle.current_turn += 1
-          pokemon_defender.save
-          pokemon_attacker.save
-          pokemon_skill.save
-
-
-          respond_to do |format|
-            if @pokemon_battle.save
-              format.html { redirect_to @pokemon_battle }
-              format.json { render :show, status: :created, location: @pokemon_battle }
-            else
-              format.html { render :show }
-              format.json { render json: @pokemon_battle.errors, status: :unprocessable_entity }
-            end
-          end
-        else
-          @errors = { skill: 'Current PP must be greater than 0.'}
-          decorator = PokemonBattleDecorator.new(self)
-          @decorated_pokemon_battle = decorator.decorate_for_show(@pokemon_battle)
-
-          respond_to do |format|
-            format.html { render :show }
-            format.json { render json: @errors, status: :unprocessable_entity }
-          end
-        end
+    battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_attacker], params[:pokemon_defender], params[:skill])
+    if battle_engine.valid_next_turn?
+      battle_engine.next_turn!
+      battle_engine.save!
+      respond_to do |format|
+        format.html { redirect_to @pokemon_battle }
+        format.json { render :show, status: :created, location: @pokemon_battle }
       end
     else
-      @errors = { skill: 'Pokemon Skill must exist.'}
       decorator = PokemonBattleDecorator.new(self)
+      @errors = battle_engine.errors
       @decorated_pokemon_battle = decorator.decorate_for_show(@pokemon_battle)
-
       respond_to do |format|
         format.html { render :show }
         format.json { render json: @errors, status: :unprocessable_entity }
       end
     end
 
-
   end
 
   def surrender
     @pokemon_battle = PokemonBattle.find(params[:pokemon_battle_id])
-    pokemon_attacker = Pokemon.find(params[:pokemon_attacker])
-    pokemon_defender = Pokemon.find(params[:pokemon_defender])
-    @pokemon_battle.pokemon_loser_id = pokemon_attacker.id
-    @pokemon_battle.pokemon_winner_id = pokemon_defender.id
-    @pokemon_battle.state = "Finish"
-
-    pokemon_defender.current_experience += PokemonBattleCalculator.calculate_experience(pokemon_attacker.level)
-    if PokemonBattleCalculator.level_up?(pokemon_defender.level, pokemon_defender.current_experience)
-      pokemon_defender.level += 1
-      stats = PokemonBattleCalculator.calculate_level_up_extra_stats
-      pokemon_defender.max_health_point += stats.health_point
-      pokemon_defender.attack += stats.attack_point
-      pokemon_defender.defence += stats.defence_point
-      pokemon_defender.speed += stats.speed_point
-
-    end
-    pokemon_defender.save
+    battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_defender], params[:pokemon_attacker], params[:skill])
+    battle_engine.next_turn!
+    battle_engine.save!
     respond_to do |format|
-            if @pokemon_battle.save
-              format.html { redirect_to @pokemon_battle, notice: 'Pokemon battle was successfully created.' }
-              format.json { render :show, status: :created, location: @pokemon_battle }
-            else
-              format.html { render :new }
-              format.json { render json: @pokemon_battle.errors, status: :unprocessable_entity }
-            end
-          end
+      format.html { redirect_to @pokemon_battle }
+      format.json { render :show, status: :created, location: @pokemon_battle }
+    end
   end
   # GET /pokemon_battles/new
   def new

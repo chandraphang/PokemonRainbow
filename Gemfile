@@ -24,6 +24,12 @@ gem 'coffee-rails', '~> 4.2'
 # enumerize
 gem 'enumerize'
 
+group :development do
+  gem "better_errors"
+end
+gem "binding_of_caller"
+
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
