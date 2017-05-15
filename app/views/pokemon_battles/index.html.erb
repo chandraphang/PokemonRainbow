@@ -11,7 +11,8 @@
         <th>Pokemon 2</th>
         <th>Turn</th>
         <th>Status</th>
-        <th>Action</th>
+        <th>Pokemon Winner</th>
+        <th>Pokemon Loser</th>
       </tr>
       <% @decorated_pokemon_battles.each do |f| %>
       <tr>
@@ -19,7 +20,8 @@
         <td class="col-md-1"><%=f.link_to_pokemon2%></td>
         <td class="col-md-1"><%=f.current_turn%> </td>
         <td class="col-md-1"><%=f.state%></td>
-        <td class="col-md-1"><%= f.link_to_remove %> </td>
+        <td class="col-md-1"><%=f.link_to_pokemon_winner%></td>
+        <td class="col-md-1"><%=f.link_to_pokemon_loser%></td>
 
       </tr>
       <% end %>
