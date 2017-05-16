@@ -50,7 +50,6 @@ class BattleEngine
       else
         @pokemon_defender.current_health_point -= attack
       end
-      @pokemon_skill = PokemonSkill.where(pokemon_id: @pokemon_attacker.id, skill_id: @skill.id).first
 
       if @pokemon_skill.current_pp > 0
         @pokemon_skill.current_pp -= 1
@@ -67,5 +66,6 @@ class BattleEngine
     @pokemon_battle.save
     @pokemon_attacker.save
     @pokemon_defender.save
+    @pokemon_skill.save
   end
 end

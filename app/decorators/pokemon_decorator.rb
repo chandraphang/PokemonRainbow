@@ -68,7 +68,7 @@ class PokemonDecorator
   end
 
   def set_image(pokemon)
-    image_tag Pokedex.find(pokemon).image_url, :alt => 'Pokemon Image'
+    image_tag Pokedex.find(pokemon).image_url, :alt => 'Pokemon Image', class: 'pokemon-image'
   end
 
   def set_link_to_show(pokemon)

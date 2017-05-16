@@ -58,7 +58,7 @@ class PokedexDecorator
   end
 
   def set_image(image_url)
-    image_tag image_url, :alt => 'product_image'
+    image_tag image_url, :alt => 'product_image', class: 'pokemon-image'
   end
 
   def set_link_to_show(pokedex)

@@ -73,3 +73,8 @@ a{
     float: left;
     margin-right: 10px;
 }
+
+.pokemon-image{
+    width: 50%;
+    height: 50%;
+}
