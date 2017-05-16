@@ -1,5 +1,5 @@
 class PokemonBattlesController < ApplicationController
-  before_action :set_pokemon_battle, only: [:show, :edit, :update, :destroy]
+  before_action :set_pokemon_battle, only: [:show, :destroy]
 
   # GET /pokemon_battles
   # GET /pokemon_battles.json
@@ -16,12 +16,19 @@ class PokemonBattlesController < ApplicationController
     @decorated_pokemon_battle = decorator.decorate_for_show(PokemonBattle.find(params[:id]))
   end
 
+  def show_pokemon_battle_log
+    @battle_logs = PokemonBattleLog.where(pokemon_battle_id: params[:pokemon_battle_id])
+    decorator = PokemonBattleLogDecorator.new(self)
+    @decorated_pokemon_battle_log = decorator.decorate_for_index(@battle_logs)
+  end
+
   def attack
     @pokemon_battle = PokemonBattle.find(params[:pokemon_battle_id])
     battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_attacker], params[:pokemon_defender], params[:skill])
     if battle_engine.valid_next_turn?
       battle_engine.next_turn!
       battle_engine.save!
+      battle_engine.battle_log!
       respond_to do |format|
         format.html { redirect_to @pokemon_battle }
         format.json { render :show, status: :created, location: @pokemon_battle }
@@ -43,6 +50,7 @@ class PokemonBattlesController < ApplicationController
     battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_defender], params[:pokemon_attacker], params[:skill])
     battle_engine.next_turn!
     battle_engine.save!
+    battle_engine.battle_log!
     respond_to do |format|
       format.html { redirect_to @pokemon_battle }
       format.json { render :show, status: :created, location: @pokemon_battle }
@@ -53,9 +61,7 @@ class PokemonBattlesController < ApplicationController
     @pokemon_battle = PokemonBattle.new
   end
 
-  # GET /pokemon_battles/1/edit
-  def edit
-  end
+
 
   # POST /pokemon_battles
   # POST /pokemon_battles.json
@@ -83,20 +89,6 @@ class PokemonBattlesController < ApplicationController
         format.json { render :show, status: :created, location: @pokemon_battle }
       else
         format.html { render :new }
-        format.json { render json: @pokemon_battle.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /pokemon_battles/1
-  # PATCH/PUT /pokemon_battles/1.json
-  def update
-    respond_to do |format|
-      if @pokemon_battle.update(pokemon_battle_params)
-        format.html { redirect_to @pokemon_battle, notice: 'Pokemon battle was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pokemon_battle }
-      else
-        format.html { render :edit }
         format.json { render json: @pokemon_battle.errors, status: :unprocessable_entity }
       end
     end

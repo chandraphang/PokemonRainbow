@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :pokemon_battles do
     patch 'attack'
     patch 'surrender'
+    post 'show_pokemon_battle_log'
   end
   resources :pokemon_skills
   resources :pokemons do
@@ -10,7 +11,6 @@ Rails.application.routes.draw do
   end
   resources :pokedexes
   resources :skills
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'pokedexes#home'
 end

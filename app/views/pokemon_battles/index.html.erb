@@ -13,6 +13,7 @@
         <th>Status</th>
         <th>Pokemon Winner</th>
         <th>Pokemon Loser</th>
+        <th>Action</th>
       </tr>
       <% @decorated_pokemon_battles.each do |f| %>
       <tr>
@@ -22,7 +23,7 @@
         <td class="col-md-1"><%=f.state%></td>
         <td class="col-md-1"><%=f.link_to_pokemon_winner%></td>
         <td class="col-md-1"><%=f.link_to_pokemon_loser%></td>
-
+        <td class="col-md-1"><%=f.link_to_pokemon_battle_log%></td>
       </tr>
       <% end %>
     </table>

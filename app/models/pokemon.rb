@@ -7,7 +7,8 @@ class Pokemon < ApplicationRecord
     has_many :pokemon2, class_name: 'PokemonBattle', foreign_key: 'pokemon2_id', dependent: :destroy
     has_many :pokemon_winner, class_name: 'PokemonBattle', foreign_key: 'pokemon_winner_id', dependent: :destroy
     has_many :pokemon_loser, class_name: 'PokemonBattle', foreign_key: 'pokemon_loser_id', dependent: :destroy
-
+    has_many :attacker, class_name: 'PokemonBattleLog', foreign_key: 'attacker_id', dependent: :destroy
+    has_many :defender, class_name: 'PokemonBattleLog', foreign_key: 'defender_id', dependent: :destroy
 
     validates :name, :presence =>true,:uniqueness => true, if: ':pokedex_present'
     validates :current_experience, :numericality => { :greater_than_or_equal_to => 0 }, if: 'pokedex_present'

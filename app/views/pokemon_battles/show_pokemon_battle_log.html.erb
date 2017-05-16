@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="title-bar">
+    <h1 class="title">Pokemon Battle Logs</h1>
+  </div>
+  <div class ="padding">
+    <table class="table table-bordered">
+      <tr>
+        <th>Turn</th>
+        <th>Attacker</th>
+        <th>Attacker Current HP</th>
+        <th>Skill</th>
+        <th>Damage</th>
+        <th>Defender</th>
+        <th>Defender Current HP</th>
+        <th>Action Type</th>
+      </tr>
+      <% @decorated_pokemon_battle_log.each do |f| %>
+      <tr>
+        <td class="col-md-1"><%=f.turn%> </td>
+        <td class="col-md-1"><%=f.attacker%></td>
+        <td class="col-md-1"><%=f.current_health_point_attacker%> </td>
+        <td class="col-md-1"><%=f.skill%></td>
+        <td class="col-md-1"><%=f.damage%></td>
+        <td class="col-md-1"><%=f.defender%></td>
+        <td class="col-md-1"><%=f.current_health_point_defender%></td>
+        <td class="col-md-1"><%=f.action_type%></td>
+      </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>

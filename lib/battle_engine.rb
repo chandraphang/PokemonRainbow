@@ -6,10 +6,10 @@ class BattleEngine
     @pokemon_attacker = Pokemon.find(pokemon_attacker)
     @pokemon_defender = Pokemon.find(pokemon_defender)
     @skill = Skill.where(name: skill).first
-      if skill.present?
-        @pokemon_skill = PokemonSkill.where(pokemon_id: @pokemon_attacker.id, skill_id: @skill.id).first
-      end
-   end
+    if skill.present?
+      @pokemon_skill = PokemonSkill.where(pokemon_id: @pokemon_attacker.id, skill_id: @skill.id).first
+    end
+  end
 
   def valid_next_turn?
     if @skill.nil?
@@ -29,8 +29,8 @@ class BattleEngine
   def next_turn!
 
     if @skill.present?
-      attack = PokemonBattleCalculator.calculate_damage(@pokemon_attacker, @pokemon_defender, @skill)
-      remaining_health_point = @pokemon_defender.current_health_point - attack
+      @attack = PokemonBattleCalculator.calculate_damage(@pokemon_attacker, @pokemon_defender, @skill)
+      remaining_health_point = @pokemon_defender.current_health_point - @attack
 
 
       if remaining_health_point <= 0
@@ -48,24 +48,50 @@ class BattleEngine
           @pokemon_attacker.speed += stats.speed_point
         end
       else
-        @pokemon_defender.current_health_point -= attack
+        @pokemon_defender.current_health_point -= @attack
       end
 
       if @pokemon_skill.current_pp > 0
         @pokemon_skill.current_pp -= 1
         @pokemon_battle.current_turn += 1
       end
-  else
-    @pokemon_battle.pokemon_winner_id = @pokemon_attacker.id
-    @pokemon_battle.pokemon_loser_id = @pokemon_defender.id
-    @pokemon_battle.state = "Finish"
-  end
+    else
+      @pokemon_battle.pokemon_winner_id = @pokemon_attacker.id
+      @pokemon_battle.pokemon_loser_id = @pokemon_defender.id
+      @pokemon_battle.state = "Finish"
+    end
   end
 
   def save!
     @pokemon_battle.save
     @pokemon_attacker.save
     @pokemon_defender.save
-    @pokemon_skill.save
+    if @skill.present?
+      @pokemon_skill.save
+    end
+  end
+
+  def battle_log!
+    @battle_log = PokemonBattleLog.new
+    @battle_log.pokemon_battle_id = @pokemon_battle.id
+    @battle_log.damage = @attack
+    if @skill.present?
+      @battle_log.turn = @pokemon_battle.current_turn-1
+      @battle_log.skill_id = @skill.id
+      @battle_log.attacker_id = @pokemon_attacker.id
+      @battle_log.defender_id = @pokemon_defender.id
+      @battle_log.action_type = "Attack"
+      @battle_log.attacker_current_health_point = @pokemon_attacker.current_health_point
+      @battle_log.defender_current_health_point = @pokemon_defender.current_health_point
+    else
+      @battle_log.turn = @pokemon_battle.current_turn
+      @battle_log.skill_id = nil
+      @battle_log.attacker_id = @pokemon_defender.id
+      @battle_log.defender_id = @pokemon_attacker.id
+      @battle_log.action_type = "Surrender"
+      @battle_log.attacker_current_health_point = @pokemon_defender.current_health_point
+      @battle_log.defender_current_health_point = @pokemon_attacker.current_health_point
+    end
+    @battle_log.save
   end
 end

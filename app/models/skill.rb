@@ -1,7 +1,7 @@
 class Skill < ApplicationRecord
   has_many :pokemon_skills, dependent: :destroy
   has_many :pokemon, through: :pokemon_skills
-
+  has_many :pokemon_battle_logs, class_name: 'PokemonBattleLog', foreign_key: 'skill_id', dependent: :destroy
   extend Enumerize
 
   ELEMENT_LIST = [

@@ -6,7 +6,7 @@ class PokemonBattle < ApplicationRecord
   belongs_to :pokemon2, class_name: 'Pokemon'
   belongs_to :pokemon_winner, class_name: 'Pokemon', optional: true
   belongs_to :pokemon_loser, class_name: 'Pokemon', optional: true
-
+  has_many :pokemon_battle_logs, dependent: :destroy
   validates :state, :inclusion => { in: STATE }
   validate :pokemon1_not_pokemon2
   validate :pokemon1_hp_not_zero, on: :create

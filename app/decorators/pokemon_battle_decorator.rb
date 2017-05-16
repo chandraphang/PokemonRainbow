@@ -22,7 +22,8 @@ class PokemonBattleDecorator
     :link_to_pokemon_winner,
     :link_to_pokemon_loser,
     :link_to_edit,
-    :link_to_remove
+    :link_to_remove,
+    :link_to_pokemon_battle_log
   )
 
   def initialize(context)
@@ -64,6 +65,7 @@ class PokemonBattleDecorator
       result.link_to_pokemon1 = set_link_to_pokemon1(pokemon_battle)
       result.link_to_pokemon2 = set_link_to_pokemon2(pokemon_battle)
       result.link_to_edit = set_link_to_edit(pokemon_battle)
+      result.link_to_pokemon_battle_log = set_link_to_pokemon_battle_log(pokemon_battle)
       result.link_to_remove = set_link_to_remove(pokemon_battle)
       result.state = pokemon_battle.state
 
@@ -95,6 +97,10 @@ class PokemonBattleDecorator
 
   def set_current_hp(pokemon)
     pokemon.current_health_point.to_s + ' / ' + pokemon.max_health_point.to_s
+  end
+
+  def set_link_to_pokemon_battle_log(pokemon_battle)
+    @context.helpers.link_to "Show Log", pokemon_battle_show_pokemon_battle_log_path(pokemon_battle),:method => 'post',class: 'btn btn-default btn-remove'
   end
 
   def set_link_to_pokemon_winner_or_loser(pokemon)
