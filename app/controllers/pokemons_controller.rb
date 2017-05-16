@@ -12,13 +12,23 @@ class PokemonsController < ApplicationController
   # GET /pokemons/1.json
   def show
     pokemon = Pokemon.find(params[:id])
+    pokemon_in_battle = []
+    on_going_battle = PokemonBattle.where(state: 'On Going')
+    on_going_battle.each do |battle|
+      pokemon_in_battle << battle.pokemon1
+      pokemon_in_battle << battle.pokemon2
+    end
+    if pokemon_in_battle.include?(pokemon)
+      @show_heal_btn = false
+    else
+      @show_heal_btn = true
+    end
 
     decorator = PokemonDecorator.new(self)
     @decorated_pokemon = decorator.decorate_for_show(pokemon)
 
     decorator_pokemon_skill = PokemonSkillDecorator.new(self)
     @decorated_pokemon_skills = decorator_pokemon_skill.decorate_for_index(pokemon.pokemon_skills)
-
     @pokemon_skill = PokemonSkill.new
   end
 
@@ -38,7 +48,7 @@ class PokemonsController < ApplicationController
     decorator_pokemon_skill = PokemonSkillDecorator.new(self)
     @decorated_pokemon_skills = decorator_pokemon_skill.decorate_for_index(pokemon.pokemon_skills)
     respond_to do |format|
-    if @pokemon_skill.save
+      if @pokemon_skill.save
         format.html { redirect_to pokemon, notice: 'Skill was successfully added.' }
         format.json { render :show, status: :created, location: pokemon }
       else
@@ -67,6 +77,54 @@ class PokemonsController < ApplicationController
   def edit
   end
 
+  def heal_one
+    pokemon = Pokemon.find(params[:pokemon_id])
+    pokemon_in_battle = []
+    on_going_battle = PokemonBattle.where(state: 'On Going')
+    on_going_battle.each do |battle|
+      pokemon_in_battle << battle.pokemon1
+      pokemon_in_battle << battle.pokemon2
+    end
+    unless pokemon_in_battle.include?(pokemon)
+      pokemon.current_health_point = pokemon.max_health_point
+      pokemon.save
+      pokemon.pokemon_skills.each do |x|
+        x.current_pp = x.skill.max_pp
+        x.save
+      end
+    end
+
+    respond_to do |format|
+      format.html { render pokemon }
+      format.json { render :index, status: :created, location: @pokemon }
+    end
+  end
+
+  def heal_all
+    pokemons = Pokemon.all
+    pokemon_in_battle = []
+    on_going_battle = PokemonBattle.where(state: 'On Going')
+    on_going_battle.each do |battle|
+      pokemon_in_battle << battle.pokemon1
+      pokemon_in_battle << battle.pokemon2
+    end
+
+    pokemons.each do |pokemon|
+      if pokemon_in_battle.include?(pokemon)
+      else
+        pokemon.current_health_point = pokemon.max_health_point
+        pokemon.save
+        pokemon.pokemon_skills.each do |x|
+          x.current_pp = x.skill.max_pp
+          x.save
+        end
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to pokemons_url }
+      format.json { render :index, status: :created, location: @pokemon }
+    end
+  end
   # POST /pokemons
   # POST /pokemons.json
   def create
@@ -75,11 +133,11 @@ class PokemonsController < ApplicationController
     @pokemon.level = 1
     if pokemon_params[:pokedex_id].present?
 
-    @pokemon.max_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
-    @pokemon.current_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
-    @pokemon.attack = Pokedex.find(pokemon_params[:pokedex_id]).base_attack
-    @pokemon.defence = Pokedex.find(pokemon_params[:pokedex_id]).base_defence
-    @pokemon.speed = Pokedex.find(pokemon_params[:pokedex_id]).base_speed
+      @pokemon.max_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
+      @pokemon.current_health_point = Pokedex.find(pokemon_params[:pokedex_id]).base_health_point
+      @pokemon.attack = Pokedex.find(pokemon_params[:pokedex_id]).base_attack
+      @pokemon.defence = Pokedex.find(pokemon_params[:pokedex_id]).base_defence
+      @pokemon.speed = Pokedex.find(pokemon_params[:pokedex_id]).base_speed
     end
     @pokemon.current_experience = 0
     respond_to do |format|
@@ -133,4 +191,4 @@ class PokemonsController < ApplicationController
     end
 
 
-end
+  end

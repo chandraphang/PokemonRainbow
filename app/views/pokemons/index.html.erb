@@ -3,7 +3,8 @@
     <h1 class="title">Pokemons</h1>
   </div>
   <div class ="padding">
-    <%= button_to "Create Pokemon", new_pokemon_path, :method => "get", class:"btn btn-primary" , id:"custom-btn"%>
+    <%= button_to "Heal All", heal_all_pokemons_path, :method => "get", class:"btn btn-primary attack-btn" , id:"custom-btn"%>
+    <%= button_to "Create Pokemon", new_pokemon_path, :method => "get", class:"btn btn-primary attack-btn" , id:"custom-btn"%>
     <table class="table table-bordered">
       <tr>
         <th>Name</th>

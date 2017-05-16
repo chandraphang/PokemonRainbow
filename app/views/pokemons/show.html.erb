@@ -4,9 +4,11 @@
   </div>
   <div class ="padding">
     <div class="new_block add-pokemon-skill">
+      <% if @show_heal_btn == true %>
+        <%= @decorated_pokemon.link_to_heal %>
+      <% end %>
       <%= @decorated_pokemon.link_to_edit %>
       <%= @decorated_pokemon.link_to_remove %>
-
     </div>
     <div class="col-md-4">
       <%= @decorated_pokemon.image %>

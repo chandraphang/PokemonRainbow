@@ -15,6 +15,7 @@ class PokemonDecorator
     :element_type,
     :current_experience,
     :image,
+    :link_to_heal,
     :link_to_show,
     :link_to_edit,
     :link_to_remove
@@ -55,7 +56,7 @@ class PokemonDecorator
     result.link_to_show = set_link_to_show(pokemon)
     result.link_to_edit = set_link_to_edit(pokemon)
     result.link_to_remove = set_link_to_remove(pokemon)
-
+    result.link_to_heal = set_link_to_heal(pokemon)
     result
   end
 
@@ -69,6 +70,10 @@ class PokemonDecorator
 
   def set_image(pokemon)
     image_tag Pokedex.find(pokemon).image_url, :alt => 'Pokemon Image', class: 'pokemon-image'
+  end
+
+  def set_link_to_heal(pokemon)
+    @context.helpers.link_to "Heal", pokemon_heal_one_path(pokemon), :method => 'get', class: 'btn btn-default btn-remove'
   end
 
   def set_link_to_show(pokemon)

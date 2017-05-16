@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   end
   resources :pokemon_skills
   resources :pokemons do
+    get 'heal_one'
+    get 'heal_all', on: :collection
     post 'create_pokemon_skill'
     post 'delete_pokemon_skill/:skill_id', to: 'pokemons#delete_pokemon_skill', as: 'delete_pokemon_skill'
   end
