@@ -25,8 +25,8 @@ class Skill < ApplicationRecord
 
   enumerize :element_type, in: ELEMENT_LIST
 
-  validates :name, :presence =>true,:uniqueness => true
-  validates :power, :numericality => { :greater_than => 0 }
-  validates :max_pp, :numericality => { :greater_than => 0 }
+  validates :name, presence: true, uniqueness: true
+  validates :power,  presence: true, numericality: { greater_than: 0 }
+  validates :max_pp,  presence: true, numericality: { greater_than: 0 }
 
   end

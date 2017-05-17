@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20170516020627) do
     t.integer  "base_defence",      null: false
     t.integer  "base_speed",        null: false
     t.string   "element_type",      null: false
-    t.string   "image_url",         null: false
+    t.string   "image_url"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["name"], name: "index_pokedexes_on_name", unique: true, using: :btree

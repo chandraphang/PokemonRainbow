@@ -7,7 +7,7 @@ class CreatePokedexes < ActiveRecord::Migration[5.0]
         t.integer :base_defence, null: false
         t.integer :base_speed, null: false
         t.string :element_type, null: false
-        t.string :image_url, null: false
+        t.string :image_url
         t.timestamps
 
     end
