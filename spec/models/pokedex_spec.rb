@@ -1,6 +1,6 @@
-require 'rails_helper'
+    require 'rails_helper'
 
-describe Pokedex, type: :model do
+    describe Pokedex, type: :model do
 
 it 'should be able to save pokedex' do
     pokedex = Pokedex.new
