@@ -7,7 +7,7 @@ class PokedexesController < ApplicationController
     decorator = PokedexDecorator.new(self)
     @decorated_pokedexes = decorator.decorate_for_index(Pokedex.all)
     add_breadcrumb "Home", root_path
-    add_breadcrumb "Pokedex", pokedexes_path
+    add_breadcrumb "Pokedex"
   end
 
   # GET /pokedexes/1
@@ -17,14 +17,14 @@ class PokedexesController < ApplicationController
     @decorated_pokedex = decorator.decorate_for_show(Pokedex.find(params[:id]))
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokedex", pokedexes_path
-    add_breadcrumb @decorated_pokedex.name, pokedex_path
+    add_breadcrumb @decorated_pokedex.name
   end
 
   # GET /pokedexes/new
   def new
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokedex", pokedexes_path
-    add_breadcrumb "New", new_pokedex_path
+    add_breadcrumb "New"
     @pokedex = Pokedex.new
   end
 
@@ -35,11 +35,11 @@ class PokedexesController < ApplicationController
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokedexes", pokedexes_path
     add_breadcrumb @decorated_pokedex.name, pokedex_path
-    add_breadcrumb "Edit", edit_pokedex_path
+    add_breadcrumb "Edit"
   end
 
   def home
-    add_breadcrumb "Home", root_path
+    add_breadcrumb "Home"
   end
 
   # POST /pokedexes

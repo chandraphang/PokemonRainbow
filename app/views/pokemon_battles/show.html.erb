@@ -4,6 +4,7 @@
   </div>
 
   <div class ="padding">
+    <%= @decorated_pokemon_battle.link_to_pokemon_battle_log%>
       <div class="row control-group">
        <div class="form-group col-xs-4 floating-label-form-group controls">
          <% if @pokemon_battle.pokemon_winner_id == @decorated_pokemon_battle.pokemon1_id%>

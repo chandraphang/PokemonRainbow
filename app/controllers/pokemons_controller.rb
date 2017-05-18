@@ -7,7 +7,7 @@ class PokemonsController < ApplicationController
     decorator = PokemonDecorator.new(self)
     @decorated_pokemons = decorator.decorate_for_index(Pokemon.all)
     add_breadcrumb "Home", root_path
-    add_breadcrumb "Pokemon", pokemons_path
+    add_breadcrumb "Pokemon"
   end
 
   # GET /pokemons/1
@@ -34,7 +34,7 @@ class PokemonsController < ApplicationController
     @pokemon_skill = PokemonSkill.new
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokemon", pokemons_path
-    add_breadcrumb @decorated_pokemon.name, pokemon_path
+    add_breadcrumb @decorated_pokemon.name
   end
 
   def create_pokemon_skill
@@ -78,7 +78,7 @@ class PokemonsController < ApplicationController
     @pokemon = Pokemon.new
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokemon", pokemons_path
-    add_breadcrumb 'New', new_pokemon_path
+    add_breadcrumb 'New'
   end
 
   # GET /pokemons/1/edit
@@ -89,7 +89,7 @@ class PokemonsController < ApplicationController
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokemon", pokemons_path
     add_breadcrumb @decorated_pokemon.name, pokemon_path
-    add_breadcrumb 'Edit', edit_pokemon_path
+    add_breadcrumb 'Edit'
   end
 
   def heal_one

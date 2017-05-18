@@ -6,20 +6,32 @@ class PokemonBattlesController < ApplicationController
   def index
     decorator = PokemonBattleDecorator.new(self)
     @decorated_pokemon_battles = decorator.decorate_for_index(PokemonBattle.all)
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Pokemon Battle"
   end
 
   # GET /pokemon_battles/1
   # GET /pokemon_battles/1.json
   def show
-    decorator = PokemonBattleDecorator.new(self)
     @errors = {}
+    decorator = PokemonBattleDecorator.new(self)
     @decorated_pokemon_battle = decorator.decorate_for_show(PokemonBattle.find(params[:id]))
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Pokemon Battle", pokemon_battles_path
+    add_breadcrumb "#{@decorated_pokemon_battle.pokemon1} vs #{@decorated_pokemon_battle.pokemon2}"
+
   end
 
   def show_pokemon_battle_log
     @battle_logs = PokemonBattleLog.where(pokemon_battle_id: params[:pokemon_battle_id])
     decorator = PokemonBattleLogDecorator.new(self)
     @decorated_pokemon_battle_log = decorator.decorate_for_index(@battle_logs)
+    decorator = PokemonBattleDecorator.new(self)
+    @decorated_pokemon_battle = decorator.decorate_for_show(PokemonBattle.find(params[:pokemon_battle_id]))
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Pokemon Battle", pokemon_battles_path
+    add_breadcrumb "#{@decorated_pokemon_battle.pokemon1} vs #{@decorated_pokemon_battle.pokemon2}", pokemon_battle_path(params[:pokemon_battle_id])
+    add_breadcrumb "Battle Log"
   end
 
   def attack
@@ -59,6 +71,9 @@ class PokemonBattlesController < ApplicationController
   # GET /pokemon_battles/new
   def new
     @pokemon_battle = PokemonBattle.new
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Pokemon Battle", pokemon_battles_path
+    add_breadcrumb "New"
   end
 
 

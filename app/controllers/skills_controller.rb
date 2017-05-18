@@ -7,7 +7,7 @@ class SkillsController < ApplicationController
     decorator = SkillDecorator.new(self)
     @decorated_skills = decorator.decorate_for_index(Skill.all)
     add_breadcrumb "Home", root_path
-    add_breadcrumb "Skill", skills_path
+    add_breadcrumb "Skill"
   end
 
   # GET /skills/1
@@ -17,7 +17,7 @@ class SkillsController < ApplicationController
     @decorated_skill = decorator.decorate_for_show(Skill.find(params[:id]))
     add_breadcrumb "Home", root_path
     add_breadcrumb "Skill", skills_path
-    add_breadcrumb @decorated_skill.name, skill_path
+    add_breadcrumb @decorated_skill.name
   end
 
   # GET /skills/new
@@ -25,7 +25,7 @@ class SkillsController < ApplicationController
     @skill = Skill.new
     add_breadcrumb "Home", root_path
     add_breadcrumb "Skill", skills_path
-    add_breadcrumb "New", new_skill_path
+    add_breadcrumb "New"
   end
 
   # GET /skills/1/edit
@@ -35,7 +35,7 @@ class SkillsController < ApplicationController
     add_breadcrumb "Home", root_path
     add_breadcrumb "Skill", skills_path
     add_breadcrumb @decorated_skill.name, skill_path
-    add_breadcrumb "Edit", edit_skill_path
+    add_breadcrumb "Edit"
   end
 
   # POST /skills
