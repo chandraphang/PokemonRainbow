@@ -2,24 +2,27 @@ class BattleEngine
   attr_reader :errors
 
   def initialize(pokemon_battle, pokemon_attacker, pokemon_defender, skill)
+
     @pokemon_battle = PokemonBattle.find(pokemon_battle)
     @pokemon_attacker = Pokemon.find(pokemon_attacker)
     @pokemon_defender = Pokemon.find(pokemon_defender)
     @skill = Skill.where(name: skill).first
-    if skill.present?
+    if @skill.present?
       @pokemon_skill = PokemonSkill.where(pokemon_id: @pokemon_attacker.id, skill_id: @skill.id).first
     end
   end
 
   def valid_next_turn?
-    if @skill.nil?
-      @errors = { skill: 'Please Select One of Skill'}
-      false
+    if @skill.nil? || @pokemon_skill.nil?
+      if @skill.nil?
+        @errors = { skill: 'Please Select One of Skill'}
+        false
+      else
+        @errors = { skill: "Pokemon didn't have that skill"}
+        false
+      end
     elsif @pokemon_skill.current_pp <= 0
       @errors = { skill: 'Current PP must be greater than 0.'}
-      false
-    elsif !@pokemon_skill.present?
-      @errors = { skill: "Pokemon didn't have that skill"}
       false
     else
       true
