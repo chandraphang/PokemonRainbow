@@ -6,6 +6,8 @@ class SkillsController < ApplicationController
   def index
     decorator = SkillDecorator.new(self)
     @decorated_skills = decorator.decorate_for_index(Skill.all)
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Skill", skills_path
   end
 
   # GET /skills/1
@@ -13,15 +15,27 @@ class SkillsController < ApplicationController
   def show
     decorator = SkillDecorator.new(self)
     @decorated_skill = decorator.decorate_for_show(Skill.find(params[:id]))
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Skill", skills_path
+    add_breadcrumb @decorated_skill.name, skill_path
   end
 
   # GET /skills/new
   def new
     @skill = Skill.new
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Skill", skills_path
+    add_breadcrumb "New", new_skill_path
   end
 
   # GET /skills/1/edit
   def edit
+    decorator = SkillDecorator.new(self)
+    @decorated_skill = decorator.decorate_for_show(Skill.find(params[:id]))
+    add_breadcrumb "Home", root_path
+    add_breadcrumb "Skill", skills_path
+    add_breadcrumb @decorated_skill.name, skill_path
+    add_breadcrumb "Edit", edit_skill_path
   end
 
   # POST /skills
