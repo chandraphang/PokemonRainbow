@@ -30,7 +30,6 @@ class BattleEngine
   end
 
   def next_turn!
-
     if @skill.present?
       @attack = PokemonBattleCalculator.calculate_damage(@pokemon_attacker, @pokemon_defender, @skill)
       remaining_health_point = @pokemon_defender.current_health_point - @attack

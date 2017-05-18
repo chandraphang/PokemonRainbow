@@ -73,18 +73,7 @@ describe BattleEngine do
     @pokemon_battle_log.save
 
   end
-  # describe '#initialize' do
-  #   it 'initialize not return false' do
-  #     a = BattleEngine.new(@pokemon_battle.id, @pokemon_attacker.id, @pokemon_defender.id, @skill)
-  #     expect(a).to be_truthy
-  #   end
 
-  #   it 'pokemon_battle_id in initialize shoud not be null' do
-  #     a = BattleEngine.new(nil, @pokemon_attacker.id, @pokemon_defender.id, @skill)
-  #     expect(a).to raise_error
-  #   end
-
-  # end
   it 'should valid if every parameter is complete' do
     battle_engine = BattleEngine.new(@pokemon_battle.id, @pokemon_attacker.id, @pokemon_defender.id, @skill.name)
     expect(battle_engine.valid_next_turn?).to be_truthy
