@@ -5,8 +5,6 @@
 .img-center{
     display: block;
     margin: 0 auto;
-    width: 200px;
-    height: 200px;
 }
 
 #footer{
@@ -25,7 +23,6 @@ a{
 .new_block{
     clear:both;
     display: block;
-
 }
 
 #custom-btn{
@@ -77,4 +74,12 @@ a{
 .pokemon-image{
     width: 50%;
     height: 50%;
+}
+
+#custom-container{
+    border: none;
+}
+
+.breadcrumbs{
+    margin-bottom: 20px;
 }

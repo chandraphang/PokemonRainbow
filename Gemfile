@@ -23,7 +23,7 @@ gem 'coffee-rails', '~> 4.2'
 
 # enumerize
 gem 'enumerize'
-
+gem 'breadcrumbs_on_rails'
 group :development do
   gem "better_errors"
 end
