@@ -48,14 +48,11 @@ class PokemonBattlesController < ApplicationController
       battle_engine.next_turn!
       battle_engine.save!
       battle_engine.battle_log!
-      if @pokemon_battle.battle_type == 'Battle With AI'
-        if battle_engine.ai_valid_next_turn?
-          battle_engine.ai_next_turn!
-          battle_engine.save!
-          battle_engine.ai_battle_log_attack!
-        else
-          battle_engine.ai_battle_log_surrender!
-        end
+      @pokemon_battle.reload
+      if @pokemon_battle.battle_type == 'Battle With AI' && @pokemon_battle.state == 'On Going'
+        battle_engine.ai_next_turn!
+        battle_engine.save!
+        battle_engine.ai_battle_log!
       end
         respond_to do |format|
           format.html { redirect_to @pokemon_battle }
@@ -74,7 +71,7 @@ class PokemonBattlesController < ApplicationController
 
   def surrender
     @pokemon_battle = PokemonBattle.find(params[:pokemon_battle_id])
-    battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_defender], params[:pokemon_attacker], params[:skill])
+    battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_attacker], params[:pokemon_defender], params[:skill])
     battle_engine.next_turn!
     battle_engine.save!
     battle_engine.battle_log!
@@ -118,6 +115,11 @@ class PokemonBattlesController < ApplicationController
         if params[:commit] == 'Battle With AI'
           @pokemon_battle.battle_type = 'Battle With AI'
           @pokemon_battle.save
+        elsif params[:commit] == 'Auto Battle'
+          @pokemon_battle.battle_type = 'Auto Battle'
+          @pokemon_battle.save
+          auto_battle_engine = AutoBattleEngine.new(@pokemon_battle)
+          auto_battle_engine.execute!
         end
         format.html { redirect_to @pokemon_battle, notice: 'Pokemon battle was successfully created.' }
         format.json { render :show, status: :created, location: @pokemon_battle }

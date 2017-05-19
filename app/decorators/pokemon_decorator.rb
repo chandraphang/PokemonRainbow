@@ -73,7 +73,7 @@ class PokemonDecorator
   end
 
   def set_link_to_heal(pokemon)
-    @context.helpers.link_to "Heal", pokemon_heal_one_path(pokemon), :method => 'get', class: 'btn btn-success btn-remove', id: 'custom-btn'
+    @context.helpers.button_to "Heal", pokemon_heal_one_path(pokemon), :method => 'get', class: 'btn btn-success btn-remove', id: 'custom-btn'
   end
 
   def set_link_to_show(pokemon)

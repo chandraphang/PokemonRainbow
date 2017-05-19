@@ -44,7 +44,7 @@ class PokemonBattleCalculator
   end
 
   def self.level_up?(winner_level, total_experience)
-    experience_limit = winner_level * 250
+    experience_limit = winner_level^2 * 200
     if total_experience > experience_limit
         true
     else
