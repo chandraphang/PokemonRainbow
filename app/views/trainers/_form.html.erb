@@ -1,0 +1,49 @@
+<%= form_for(trainer) do |f| %>
+  <% if trainer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trainer.errors.count, "error") %> prohibited this trainer from being saved:</h2>
+
+      <ul>
+      <% trainer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row control-group">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :name%>
+   <%= f.text_field :name, class:"form-control", placeholder: "Name"%>
+   <% if !@trainer.errors[:name].blank?%>
+   <li class="error_text">
+     <%= @trainer.errors.full_messages_for(:name).join(', ') %>
+   </li>
+   <% end %>
+ </div>
+</div>
+<div class="row control-group">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :email%>
+   <%= f.text_field :email, class:"form-control", placeholder: "Email"%>
+   <% if !@trainer.errors[:email].blank?%>
+   <li class="error_text">
+     <%= @trainer.errors.full_messages_for(:email).join(', ') %>
+   </li>
+   <% end %>
+ </div>
+</div>
+<div class="row control-group">
+ <div class="form-group col-xs-12 floating-label-form-group controls">
+   <%= f.label :password%>
+   <%= f.text_field :password, class:"form-control", placeholder: "Password"%>
+   <% if !@trainer.errors[:password].blank?%>
+   <li class="error_text">
+     <%= @trainer.errors.full_messages_for(:password).join(', ') %>
+   </li>
+   <% end %>
+ </div>
+</div>
+<div class="actions form text-center">
+  <%= f.button :submit => "", class:"btn btn-default center-block" %>
+</div>
+<% end %>

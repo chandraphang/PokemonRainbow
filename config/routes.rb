@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :pokemon_trainers
+  resources :trainers do
+    post 'create_pokemon_trainer'
+    post 'delete_pokemon_trainer/:pokemon_trainer_id', to: 'trainers#delete_pokemon_trainer', as: 'delete_pokemon_trainer'
+  end
   resources :pokemon_battles do
     patch 'attack'
     patch 'surrender'

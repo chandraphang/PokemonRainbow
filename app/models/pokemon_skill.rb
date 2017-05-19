@@ -28,7 +28,7 @@ class PokemonSkill < ApplicationRecord
     end
 
     def skill_ammount_not_greater_than_four
-        if pokemon.pokemon_skills.count < 5
+        if pokemon.pokemon_skills.count < 4
             true
         else
             false

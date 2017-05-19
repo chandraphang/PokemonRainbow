@@ -53,6 +53,6 @@ class PokemonSkillDecorator
   end
 
   def set_link_to_remove(pokemon_skill)
-    @context.helpers.link_to 'Remove', pokemon_delete_pokemon_skill_path(pokemon_skill.pokemon_id, pokemon_skill.skill_id), :method => 'post', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+    @context.helpers.button_to 'Remove', pokemon_delete_pokemon_skill_path(pokemon_skill.pokemon_id, pokemon_skill.skill_id), :method => 'post', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-danger btn-remove'
   end
 end

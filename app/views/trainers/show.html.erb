@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="title-bar">
+    <h1 class="title">Trainer</h1>
+  </div>
+  <div class ="padding">
+    <div class="new_block">
+      <%= @decorated_trainer.link_to_edit %>
+      <%= @decorated_trainer.link_to_remove%>
+    </div>
+    <table class="table table-bordered">
+      <tr>
+        <th class="col-md-4">Nama: </th>
+        <td class="col-md-4"><%= @decorated_trainer.name%> </td>
+      </tr>
+      <tr>
+        <th class="col-md-4">Email:</th>
+        <td class="col-md-4"><%= @decorated_trainer.email%> </td>
+      </tr>
+      <tr>
+        <th class="col-md-4">Password:</th>
+        <td class="col-md-4"><%= @decorated_trainer.password %></td>
+      </tr>
+    </table>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>Level</th>
+        <th>HP</th>
+        <th>Attack</th>
+        <th>Defence</th>
+        <th>Speed</th>
+        <th>Type</th>
+        <th>Current Experience</th>
+        <th>Pokemon Image</th>
+        <th>Action</th>
+      </tr>
+      <% @decorated_pokemon_trainers.each do |f| %>
+      <tr>
+        <td class="col-md-1"><%= f.link_to_show%> </td>
+        <td class="col-md-1"><%= f.level %></td>
+        <td class="col-md-1"><%= f.current_health_point%></td>
+        <td class="col-md-1"><%= f.attack %></td>
+        <td class="col-md-1"><%= f.defence %></td>
+        <td class="col-md-1"><%= f.speed %></td>
+        <td class="col-md-1"><%= f.element_type%></td>
+        <td class="col-md-1"><%= f.current_experience %></td>
+        <td class="col-md-1"><%= image_tag Pokedex.find(f.pokedex_id).image_url, :class => "pokemon_icon" %></td>
+        <td class="col-md-1"><%= f.link_to_remove %></td>
+      </tr>
+      <% end %>
+    </table>
+
+    <%= form_for(@pokemon_trainer, url: trainer_create_pokemon_trainer_path(@decorated_trainer.id)) do |f| %>
+    <div class="new_block add-pokemon-skill">
+      <h2>Add New Pokemon</h2>
+    </div>
+    <div class="row control-group">
+      <div class="form-group col-xs-12 floating-label-form-group controls">
+        <%= f.label :Pokemon%>
+        <%= f.select("pokemon_id", Pokemon.all.collect {|p| [ p.name, p.id ] }, { include_blank: '-- Please Select Pokemon Below --' }, {:class => "form-control"})%>
+        <% @pokemon_trainer.errors.full_messages.each do |message| %>
+        <li class="error_text"><%= message %></li>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="actions form">
+      <%= f.button :submit => "Submit", class:"btn btn-default" %>
+    </div>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="title-bar">
+    <h1 class="title">Trainer</h1>
+  </div>
+  <div class ="padding">
+    <%= button_to "Create Trainer", new_trainer_path, :method => "get", class:"btn btn-primary" , id:"custom-btn"%>
+    <table class="table table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+      <% @decorated_trainers.each do |f| %>
+      <tr>
+        <td class="col-md-2"><%= f.link_to_show%> </td>
+        <td class="col-md-2"><%= f.email %></td>
+        <td class="col-md-2"><%= f.password %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
