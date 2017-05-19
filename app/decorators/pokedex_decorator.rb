@@ -66,10 +66,10 @@ class PokedexDecorator
   end
 
   def set_link_to_edit(pokedex)
-    @context.helpers.link_to 'Edit', edit_pokedex_path(pokedex), class: 'btn btn-default btn-remove'
+    @context.helpers.button_to 'Edit', edit_pokedex_path(pokedex), :method => "get", class: 'btn btn-warning btn-remove', id: 'custom-btn'
   end
 
   def set_link_to_remove(pokedex)
-    @context.helpers.link_to 'Remove', pokedex, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+    @context.helpers.button_to 'Remove', pokedex, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-danger btn-remove'
   end
 end

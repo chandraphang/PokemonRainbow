@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   resources :pokemon_battles do
     patch 'attack'
     patch 'surrender'
-    post 'show_pokemon_battle_log'
+    get 'battle_with_ai'
+    get 'show_pokemon_battle_log'
   end
   resources :pokemon_skills
   resources :pokemons do

@@ -28,12 +28,12 @@
            </li>
            <%= hidden_field_tag "pokemon_attacker", @decorated_pokemon_battle.pokemon1_id %>
            <%= hidden_field_tag "pokemon_defender", @decorated_pokemon_battle.pokemon2_id %>
-           <%= submit_tag 'Attack', class:"btn btn-primary attack-btn"%>
+           <%= submit_tag 'Attack', class:"btn btn-primary attack-btn", id: 'custom-btn'%>
            <% end %>
            <%= form_tag pokemon_battle_surrender_path(@pokemon_battle) , method: :patch do %>
            <%= hidden_field_tag "pokemon_attacker", @decorated_pokemon_battle.pokemon1_id %>
            <%= hidden_field_tag "pokemon_defender", @decorated_pokemon_battle.pokemon2_id %>
-           <%= submit_tag 'Surrender', class:"btn btn-danger attack-btn"%>
+           <%= submit_tag 'Surrender', class:"btn btn-danger attack-btn", id: 'custom-btn'%>
 
            <% end %>
            <% end %>
@@ -45,6 +45,7 @@
        <div class="form-group col-xs-4 floating-label-form-group controls">
          <h1 class="text-center">VS</h1>
          <h1 class="text-center"><%= @pokemon_battle.state %></h1>
+         <h1 class="text-center"><%= @pokemon_battle.battle_type %></h1>
        </div>
 
        <div class="form-group col-xs-4 floating-label-form-group controls">
@@ -58,7 +59,7 @@
          <div class ="padding-battle-details">
            <h5>Name : <%=@decorated_pokemon_battle.pokemon2%></h5>
            <h5>HP : <%=@decorated_pokemon_battle.current_hp_pokemon2%></h5>
-           <% if @pokemon_battle.current_turn%2 == 0 and @pokemon_battle.state == 'On Going'%>
+           <% if @pokemon_battle.current_turn%2 == 0 and @pokemon_battle.state == 'On Going' and @pokemon_battle.battle_type != 'Battle With AI' %>
            <h5>Skill : </h5>
            <%= form_tag pokemon_battle_attack_path(@pokemon_battle) , method: :patch do %>
            <%= select_tag("skill", options_for_select(PokemonSkill.where(pokemon_id: @pokemon_battle.pokemon2_id).map {|f| Skill.find(f.skill_id).name }),{class: 'form-control', include_blank: '-- Please Select Skill Below --'})%>
@@ -67,12 +68,12 @@
            </li>
            <%= hidden_field_tag "pokemon_attacker", @decorated_pokemon_battle.pokemon2_id %>
            <%= hidden_field_tag "pokemon_defender", @decorated_pokemon_battle.pokemon1_id %>
-           <%= submit_tag 'Attack', class:"btn btn-primary attack-btn"%>
+           <%= submit_tag 'Attack', class:"btn btn-primary attack-btn", id: 'custom-btn'%>
            <% end %>
            <%= form_tag pokemon_battle_surrender_path(@pokemon_battle) , method: :patch do %>
            <%= hidden_field_tag "pokemon_attacker", @decorated_pokemon_battle.pokemon2_id %>
            <%= hidden_field_tag "pokemon_defender", @decorated_pokemon_battle.pokemon1_id %>
-           <%= submit_tag 'Surrender', class:"btn btn-danger attack-btn"%>
+           <%= submit_tag 'Surrender', class:"btn btn-danger attack-btn", id: 'custom-btn'%>
 
            <% end %>
            <% end %>

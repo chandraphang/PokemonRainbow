@@ -37,8 +37,8 @@ class PokemonBattleLogDecorator
     else
       result.skill = '-'
     end
-    result.current_health_point_attacker = set_current_health(battle_log.attacker)
-    result.current_health_point_defender = set_current_health(battle_log.defender)
+    result.current_health_point_attacker = set_current_health_attacker(battle_log, battle_log.attacker)
+    result.current_health_point_defender = set_current_health_defender(battle_log, battle_log.defender)
     if battle_log.damage.present?
       result.damage = battle_log.damage
     else
@@ -50,8 +50,12 @@ class PokemonBattleLogDecorator
     result
   end
 
-  def set_current_health(pokemon)
-    pokemon.current_health_point.to_s + ' / ' + pokemon.max_health_point.to_s
+  def set_current_health_attacker(battle_log, pokemon_attacker)
+    battle_log.attacker_current_health_point.to_s + ' / ' + pokemon_attacker.max_health_point.to_s
+  end
+
+  def set_current_health_defender(battle_log, pokemon_defender)
+    battle_log.defender_current_health_point.to_s + ' / ' + pokemon_defender.max_health_point.to_s
   end
 
 end

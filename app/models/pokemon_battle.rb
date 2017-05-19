@@ -1,7 +1,7 @@
 class PokemonBattle < ApplicationRecord
 
-  STATE = ["On Going", "Finish"]
-
+  STATE = ["On Going", "Finish"].freeze
+  BATTLE_TYPE = ['Manual Battle', 'Battle With AI', 'Auto Battle'].freeze
   belongs_to :pokemon1, class_name: 'Pokemon'
   belongs_to :pokemon2, class_name: 'Pokemon'
   belongs_to :pokemon_winner, class_name: 'Pokemon', optional: true
@@ -16,6 +16,7 @@ class PokemonBattle < ApplicationRecord
   validates :pokemon1_max_health_point, numericality: { greater_than:  0 }, if: 'pokemon1_present'
   validates :pokemon2_max_health_point, numericality: { greater_than:  0 }, if: 'pokemon2_present'
   validates :state, :inclusion => { in: STATE }
+  validates :battle_type, :inclusion => { in: BATTLE_TYPE }
   validate :pokemon1_not_pokemon2, if: 'pokemon1_present' and 'pokemon2_present'
   validate :pokemon1_hp_not_zero, on: :create, if: 'pokemon1_present'
   validate :pokemon2_hp_not_zero, on: :create, if: 'pokemon2_present'

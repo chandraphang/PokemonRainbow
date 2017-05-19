@@ -5,7 +5,7 @@ class SkillsController < ApplicationController
   # GET /skills.json
   def index
     decorator = SkillDecorator.new(self)
-    @decorated_skills = decorator.decorate_for_index(Skill.all)
+    @decorated_skills = decorator.decorate_for_index(Skill.all.order(:id))
     add_breadcrumb "Home", root_path
     add_breadcrumb "Skill"
   end

@@ -50,10 +50,10 @@ class SkillDecorator
   end
 
   def set_link_to_edit(skill)
-    @context.helpers.link_to 'Edit', edit_skill_path(skill), class: 'btn btn-default btn-remove'
+    @context.helpers.button_to 'Edit', edit_skill_path(skill), method: 'get', class: 'btn btn-warning btn-remove', id: 'custom-btn'
   end
 
   def set_link_to_remove(skill)
-    @context.helpers.link_to 'Remove', skill, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+    @context.helpers.button_to 'Remove', skill, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-danger btn-remove', id: 'custom-btn'
   end
 end

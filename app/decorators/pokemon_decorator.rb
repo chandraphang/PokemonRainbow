@@ -73,7 +73,7 @@ class PokemonDecorator
   end
 
   def set_link_to_heal(pokemon)
-    @context.helpers.link_to "Heal", pokemon_heal_one_path(pokemon), :method => 'get', class: 'btn btn-default btn-remove'
+    @context.helpers.link_to "Heal", pokemon_heal_one_path(pokemon), :method => 'get', class: 'btn btn-success btn-remove', id: 'custom-btn'
   end
 
   def set_link_to_show(pokemon)
@@ -81,10 +81,10 @@ class PokemonDecorator
   end
 
   def set_link_to_edit(pokemon)
-    @context.helpers.link_to 'Edit', edit_pokemon_path(pokemon), class: 'btn btn-default btn-remove'
+    @context.helpers.button_to 'Edit', edit_pokemon_path(pokemon), :method => 'get', class: 'btn btn-warning btn-remove', id: 'custom-btn'
   end
 
   def set_link_to_remove(pokemon)
-    @context.helpers.link_to 'Remove', pokemon, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+    @context.helpers.button_to 'Remove', pokemon, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-danger btn-remove', id: 'custom-btn'
   end
 end

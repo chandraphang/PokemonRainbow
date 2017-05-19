@@ -5,7 +5,7 @@ class PokemonBattlesController < ApplicationController
   # GET /pokemon_battles.json
   def index
     decorator = PokemonBattleDecorator.new(self)
-    @decorated_pokemon_battles = decorator.decorate_for_index(PokemonBattle.all)
+    @decorated_pokemon_battles = decorator.decorate_for_index(PokemonBattle.all.order(id: :desc))
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokemon Battle"
   end
@@ -23,7 +23,7 @@ class PokemonBattlesController < ApplicationController
   end
 
   def show_pokemon_battle_log
-    @battle_logs = PokemonBattleLog.where(pokemon_battle_id: params[:pokemon_battle_id])
+    @battle_logs = PokemonBattleLog.where(pokemon_battle_id: params[:pokemon_battle_id]).order(:id)
     decorator = PokemonBattleLogDecorator.new(self)
     @decorated_pokemon_battle_log = decorator.decorate_for_index(@battle_logs)
     decorator = PokemonBattleDecorator.new(self)
@@ -36,25 +36,40 @@ class PokemonBattlesController < ApplicationController
 
   def attack
     @pokemon_battle = PokemonBattle.find(params[:pokemon_battle_id])
+    if @pokemon_battle.battle_type == 'Auto Battle'
+      battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_attacker], params[:pokemon_defender], params[:skill])
+      while battle_engine.auto_battle_valid_next_turn?
+
+      end
+    end
+
     battle_engine = BattleEngine.new(params[:pokemon_battle_id], params[:pokemon_attacker], params[:pokemon_defender], params[:skill])
     if battle_engine.valid_next_turn?
       battle_engine.next_turn!
       battle_engine.save!
       battle_engine.battle_log!
-      respond_to do |format|
-        format.html { redirect_to @pokemon_battle }
-        format.json { render :show, status: :created, location: @pokemon_battle }
+      if @pokemon_battle.battle_type == 'Battle With AI'
+        if battle_engine.ai_valid_next_turn?
+          battle_engine.ai_next_turn!
+          battle_engine.save!
+          battle_engine.ai_battle_log_attack!
+        else
+          battle_engine.ai_battle_log_surrender!
+        end
       end
-    else
-      decorator = PokemonBattleDecorator.new(self)
-      @errors = battle_engine.errors
-      @decorated_pokemon_battle = decorator.decorate_for_show(@pokemon_battle)
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.html { redirect_to @pokemon_battle }
+          format.json { render :show, status: :created, location: @pokemon_battle }
+        end
+      else
+        decorator = PokemonBattleDecorator.new(self)
+        @errors = battle_engine.errors
+        @decorated_pokemon_battle = decorator.decorate_for_show(@pokemon_battle)
+        respond_to do |format|
+          format.html { render :show }
+          format.json { render json: @errors, status: :unprocessable_entity }
+        end
       end
-    end
-
   end
 
   def surrender
@@ -87,8 +102,8 @@ class PokemonBattlesController < ApplicationController
       @pokemon_battle.pokemon1_max_health_point = Pokemon.find(params[:pokemon_battle][:pokemon1_id]).max_health_point
     end
     if params[:pokemon_battle][:pokemon2_id].present?
-    @pokemon_battle.pokemon2_id = params[:pokemon_battle][:pokemon2_id].to_i
-    @pokemon_battle.pokemon2_max_health_point = Pokemon.find(params[:pokemon_battle][:pokemon2_id]).max_health_point
+      @pokemon_battle.pokemon2_id = params[:pokemon_battle][:pokemon2_id].to_i
+      @pokemon_battle.pokemon2_max_health_point = Pokemon.find(params[:pokemon_battle][:pokemon2_id]).max_health_point
     end
 
 
@@ -97,9 +112,13 @@ class PokemonBattlesController < ApplicationController
     @pokemon_battle.pokemon_winner_id = nil
     @pokemon_battle.pokemon_loser_id = nil
     @pokemon_battle.experience_gain = 0
-
+    @pokemon_battle.battle_type = 'Manual Battle'
     respond_to do |format|
       if @pokemon_battle.save
+        if params[:commit] == 'Battle With AI'
+          @pokemon_battle.battle_type = 'Battle With AI'
+          @pokemon_battle.save
+        end
         format.html { redirect_to @pokemon_battle, notice: 'Pokemon battle was successfully created.' }
         format.json { render :show, status: :created, location: @pokemon_battle }
       else

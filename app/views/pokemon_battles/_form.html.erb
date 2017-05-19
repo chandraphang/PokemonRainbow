@@ -21,7 +21,6 @@
    </li>
    <% end %>
  </div>
-
  <div class="form-group col-xs-4 floating-label-form-group controls">
    <h3 class="text-center">VS</h3>
  </div>
@@ -37,7 +36,14 @@
  </div>
 
 </div>
+
+  <% @pokemon_attacker = pokemon_battle[:pokemon1_id] %>
+  <% @pokemon_defender = pokemon_battle[:pokemon2_id] %>
+
 <div class="actions form text-center">
-  <%= f.button :submit => "", class:"btn btn-default center-block" %>
+  <%= f.submit "Manual Battle", class:"btn btn-primary" %>
+  <%= submit_tag 'Battle With AI', class:"btn btn-success"%>
+  <%= submit_tag 'Auto Battle', class:"btn btn-success"%>
 </div>
 <% end %>
+

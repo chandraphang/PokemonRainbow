@@ -5,7 +5,7 @@ class PokemonsController < ApplicationController
   # GET /pokemons.json
   def index
     decorator = PokemonDecorator.new(self)
-    @decorated_pokemons = decorator.decorate_for_index(Pokemon.all)
+    @decorated_pokemons = decorator.decorate_for_index(Pokemon.all.order(:id))
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokemon"
   end
@@ -110,7 +110,7 @@ class PokemonsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render pokemon }
+      format.html { redirect_to pokemon }
       format.json { render :index, status: :created, location: @pokemon }
     end
   end

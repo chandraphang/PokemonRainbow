@@ -9,6 +9,7 @@ class PokemonBattleDecorator
     :pokemon1,
     :pokemon2,
     :current_turn,
+    :battle_type,
     :state,
     :pokemon_winner_id,
     :pokemon_loser_id,
@@ -68,7 +69,7 @@ class PokemonBattleDecorator
       result.link_to_pokemon_battle_log = set_link_to_pokemon_battle_log(pokemon_battle)
       result.link_to_remove = set_link_to_remove(pokemon_battle)
       result.state = pokemon_battle.state
-
+      result.battle_type = pokemon_battle.battle_type
       if pokemon_battle.pokemon_winner.present?
         result.link_to_pokemon_winner = set_link_to_pokemon_winner_or_loser(Pokemon.find(pokemon_battle.pokemon_winner_id))
         result.link_to_pokemon_loser = set_link_to_pokemon_winner_or_loser(Pokemon.find(pokemon_battle.pokemon_loser_id))
@@ -100,7 +101,7 @@ class PokemonBattleDecorator
   end
 
   def set_link_to_pokemon_battle_log(pokemon_battle)
-    @context.helpers.link_to "Show Log", pokemon_battle_show_pokemon_battle_log_path(pokemon_battle),:method => 'post',class: 'btn btn-default btn-remove'
+    @context.helpers.link_to "Show Log", pokemon_battle_show_pokemon_battle_log_path(pokemon_battle),:method => 'get',class: 'btn btn-default btn-remove'
   end
 
   def set_link_to_pokemon_winner_or_loser(pokemon)
@@ -116,7 +117,7 @@ class PokemonBattleDecorator
   end
 
   def set_image(pokemon)
-    image_tag pokemon.pokedex.image_url, :alt => 'product_image', class: 'img-center'
+    image_tag pokemon.pokedex.image_url, :alt => 'product_image', class: 'pokemon-image img-center'
   end
 
   def set_link_to_show(pokemon_battle)
@@ -124,10 +125,10 @@ class PokemonBattleDecorator
   end
 
   def set_link_to_edit(pokemon_battle)
-    @context.helpers.link_to 'Edit', edit_pokemon_battle_path(pokemon_battle), class: 'btn btn-default btn-remove'
+    @context.helpers.link_to 'Edit', edit_pokemon_battle_path(pokemon_battle), class: 'btn btn-default btn-remove', id: 'custom-btn'
   end
 
   def set_link_to_remove(pokemon_battle)
-    @context.helpers.link_to 'Remove', pokemon_battle, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove'
+    @context.helpers.link_to 'Remove', pokemon_battle, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-default btn-remove' , id: 'custom-btn'
   end
 end

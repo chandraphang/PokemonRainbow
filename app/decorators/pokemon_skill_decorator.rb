@@ -45,9 +45,7 @@ class PokemonSkillDecorator
   end
 
   def set_current_pp(pokemon_skill)
-
     pokemon_skill.current_pp.to_s + ' / ' +pokemon_skill.skill.max_pp.to_s
-
   end
 
   def set_link_to_show(skill)

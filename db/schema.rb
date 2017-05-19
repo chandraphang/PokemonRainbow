@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170516020627) do
     t.integer  "pokemon2_id",                          null: false
     t.integer  "current_turn",                         null: false
     t.string   "state",                     limit: 45, null: false
+    t.string   "battle_type",               limit: 45, null: false
     t.integer  "pokemon_winner_id"
     t.integer  "pokemon_loser_id"
     t.integer  "experience_gain",                      null: false

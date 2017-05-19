@@ -5,7 +5,7 @@ class PokemonSkill < ApplicationRecord
     validates :pokemon_id, presence: true
     validates :current_pp, presence: true, numericality:  { greater_than_or_equal_to:  0 }, if: 'skill_present'
     validate :current_pp_must_less_or_equal_to_max_pp, if: 'skill_present'
-    validate :skill_ammount_not_greater_than_four, if: 'skill_and_pokemon_present'
+    validate :skill_ammount_not_greater_than_four, if: 'skill_and_pokemon_present', on: :create
 
     def skill_present
         skill.present?
@@ -28,7 +28,7 @@ class PokemonSkill < ApplicationRecord
     end
 
     def skill_ammount_not_greater_than_four
-        if pokemon.skills.count < 4
+        if pokemon.pokemon_skills.count < 5
             true
         else
             false

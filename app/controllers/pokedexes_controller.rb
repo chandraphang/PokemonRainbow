@@ -5,7 +5,7 @@ class PokedexesController < ApplicationController
   # GET /pokedexes.json
   def index
     decorator = PokedexDecorator.new(self)
-    @decorated_pokedexes = decorator.decorate_for_index(Pokedex.all)
+    @decorated_pokedexes = decorator.decorate_for_index(Pokedex.all.order(:id))
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokedex"
   end

@@ -26,6 +26,10 @@ a{
 }
 
 #custom-btn{
+    margin-top: 10px;
+    display: inline;
+    float: left;
+    margin-right: 10px;
     margin-bottom : 10px;
 }
 
@@ -64,16 +68,10 @@ a{
     padding-left: 50px;
 }
 
-.attack-btn{
-    margin-top: 10px;
-    display: inline;
-    float: left;
-    margin-right: 10px;
-}
 
 .pokemon-image{
-    width: 50%;
-    height: 50%;
+    width: 80%;
+    height: 80%;
 }
 
 #custom-container{
