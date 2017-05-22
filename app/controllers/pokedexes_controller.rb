@@ -39,7 +39,9 @@ class PokedexesController < ApplicationController
   end
 
   def home
+    @top_5_pokemon_winner = PokemonRainbowStatistic.generate_top_5_pokemon_winners
     add_breadcrumb "Home"
+    # raise 'a'
   end
 
   # POST /pokedexes
