@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170519071659) do
     t.integer  "trainer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_pokemon_trainers_on_pokemon_id", unique: true, using: :btree
   end
 
   create_table "pokemons", force: :cascade do |t|

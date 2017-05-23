@@ -76,48 +76,91 @@ class PokemonRainbowStatistic
   def self.generate_top_5_pokemon_win_rates
     results = []
     query_result = ActiveRecord::Base.connection.execute(
-      "SELECT pokemons.name as pokemon_name, count(pokemons.name) AS total_count, COUNT(CASE WHEN pokemon_battles.pokemon_winner_id = pokemons.id then 1 ELSE NULL END) as win_count
-
-      FROM
+    "select
+        battle_total.pokemon_id,
+        battle_total.pokemon_name,
+        battle_total.battle_count,
+        CASE WHEN count(pokemon_battles.id) = 0 THEN 0 ELSE count(pokemon_battles.id) * 100 / battle_total.battle_count END as win_rate
+      from
+          (
+        select
+          pokemons.id as pokemon_id,
+          pokemons.name as pokemon_name,
+          count(pokemon_battles.id) as battle_count
+        from
+          pokemon_battles
+        inner join
+          pokemons
+        on
+          pokemon_battles.pokemon1_id = pokemons.id or
+          pokemon_battles.pokemon2_id = pokemons.id
+        group by
+          pokemons.id
+        )
+        battle_total
+      left join
         pokemon_battles
-      INNER JOIN
-        pokemons
-      ON
-      pokemon_battles.pokemon1_id = pokemons.id or
-      pokemon_battles.pokemon2_id = pokemons.id
-      GROUP BY
-        pokemons.name
-      ORDER BY total_count DESC
-      LIMIT 5"
+      on
+        battle_total.pokemon_id = pokemon_battles.pokemon_winner_id
+      group by
+        battle_total.pokemon_id,
+        battle_total.pokemon_name,
+        battle_total.battle_count
+      order by
+        win_rate desc,
+        battle_total.battle_count desc
+      limit 5
+"
     )
 
     query_result.each do |row|
-      results << {name: row['pokemon_name'], data: [row['win_count']*100/row['total_count']]}
+      results << {name: row['pokemon_name'], data: [row['win_rate']]}
     end
-    results.sort_by { |hsh| hsh[:data] }.reverse!
+    results
   end
 
   def self.generate_top_5_pokemon_lose_rates
     results = []
     query_result = ActiveRecord::Base.connection.execute(
-      "SELECT pokemons.name as pokemon_name, count(pokemons.name) AS total_count, COUNT(CASE WHEN pokemon_battles.pokemon_loser_id = pokemons.id then 1 ELSE NULL END) as lose_count
-
-      FROM
+    " select
+        battle_total.pokemon_id,
+        battle_total.pokemon_name,
+        battle_total.battle_count,
+        CASE WHEN count(pokemon_battles.id) = 0 THEN 0 ELSE count(pokemon_battles.id) * 100 / battle_total.battle_count END as lose_rate
+      from
+          (
+        select
+          pokemons.id as pokemon_id,
+          pokemons.name as pokemon_name,
+          count(pokemon_battles.id) as battle_count
+        from
+          pokemon_battles
+        inner join
+          pokemons
+        on
+          pokemon_battles.pokemon1_id = pokemons.id or
+          pokemon_battles.pokemon2_id = pokemons.id
+        group by
+          pokemons.id
+        )
+        battle_total
+      left join
         pokemon_battles
-      INNER JOIN
-        pokemons
-      ON
-      pokemon_battles.pokemon1_id = pokemons.id or
-      pokemon_battles.pokemon2_id = pokemons.id
-      GROUP BY
-        pokemons.name
-      ORDER BY total_count DESC
-      LIMIT 5"
+      on
+        battle_total.pokemon_id = pokemon_battles.pokemon_loser_id
+      group by
+        battle_total.pokemon_id,
+        battle_total.pokemon_name,
+        battle_total.battle_count
+      order by
+        lose_rate desc,
+        battle_total.battle_count desc
+      limit 5"
     )
     query_result.each do |row|
-      results << {name: row['pokemon_name'], data: [row['lose_count']*100/row['total_count']]}
+      results << {name: row['pokemon_name'], data: [row['lose_rate']]}
     end
-    results.sort_by { |hsh| hsh[:data] }.reverse!
+    results
   end
 
   def self.generate_top_5_most_used_pokemons

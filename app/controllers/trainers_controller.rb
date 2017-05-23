@@ -34,7 +34,8 @@ class TrainersController < ApplicationController
     @pokemon_trainer.trainer_id = params[:trainer_id]
     decorator = TrainerDecorator.new(self)
     @decorated_trainer = decorator.decorate_for_show(Trainer.find(params[:trainer_id]))
-
+    @top_used_pokemon = PokemonRainbowStatistic.generate_top_used_pokemon_trainer(trainer.id)
+    @top_used_skill = PokemonRainbowStatistic.generate_top_used_skill(trainer.id)
     decorator_pokemon_trainer = PokemonTrainerDecorator.new(self)
     @decorated_pokemon_trainers = decorator_pokemon_trainer.decorate_for_index(trainer.pokemon)
     respond_to do |format|

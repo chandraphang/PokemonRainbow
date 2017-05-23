@@ -50,10 +50,10 @@
       </tr>
       <% end %>
     </table>
-    <div   id="top_used_pokemon">
+    <div class = "col-md-5 bar" id="top_used_pokemon">
 
     </div>
-    <div   id="top_used_skill">
+    <div class = "col-md-5 bar" id="top_used_skill">
 
     </div>
     <%= form_for(@pokemon_trainer, url: trainer_create_pokemon_trainer_path(@decorated_trainer.id)) do |f| %>
@@ -83,6 +83,9 @@
     var myChart = Highcharts.chart('top_used_pokemon', {
         chart: {
             type: 'pie'
+        },
+        tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         title: {
             text: 'Top Used Pokemon'
