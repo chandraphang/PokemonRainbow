@@ -1,4 +1,0 @@
-feedback :
-- untuk di pokemon, current hp pake decorator
-- benerin header portlet di pokemon_battle
-- tambahin validation untuk relation antara pokemon dan pokemon_battle agar ketika pokemon di delete, pokemon_battlenya jg di delete

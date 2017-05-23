@@ -18,6 +18,11 @@ class PokedexesController < ApplicationController
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokedex", pokedexes_path
     add_breadcrumb @decorated_pokedex.name
+
+    top_5_pokemon_in_pokedex_by_level = PokemonRainbowStatistic.generate_top_pokemon_in_pokedex_by_level((params[:id]))
+
+    decorator_for_top_5 = PokemonDecorator.new(self)
+    @decorated_top_5_pokemon = decorator_for_top_5.decorate_for_top_5_pokemon(top_5_pokemon_in_pokedex_by_level)
   end
 
   # GET /pokedexes/new
@@ -40,8 +45,15 @@ class PokedexesController < ApplicationController
 
   def home
     @top_5_pokemon_winner = PokemonRainbowStatistic.generate_top_5_pokemon_winners
+    @top_5_pokemon_loser = PokemonRainbowStatistic.generate_top_5_pokemon_losers
+    @top_5_pokemon_surrender = PokemonRainbowStatistic.generate_top_5_pokemon_surrenders
+    @top_5_pokemon_win_rate = PokemonRainbowStatistic.generate_top_5_pokemon_win_rates
+    @top_5_pokemon_lose_rate = PokemonRainbowStatistic.generate_top_5_pokemon_lose_rates
+    @top_5_most_used_pokemon = PokemonRainbowStatistic.generate_top_5_most_used_pokemons
+    @top_5_most_used_skill = PokemonRainbowStatistic.generate_top_5_most_used_skills
+    @top_5_pokemon_damage = PokemonRainbowStatistic.generate_top_5_pokemon_damages
+    @top_5_pokedex_average_levels = PokemonRainbowStatistic.generate_top_5_pokedex_average_level
     add_breadcrumb "Home"
-    # raise 'a'
   end
 
   # POST /pokedexes

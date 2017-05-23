@@ -6,6 +6,7 @@ class SkillDecorator
   DecoratorResult = Struct.new(
     :name,
     :power,
+    :used_count,
     :max_pp,
     :element_type,
     :link_to_show,
@@ -30,6 +31,14 @@ class SkillDecorator
     result
   end
 
+  def decorate_for_top_5_skill(skills)
+    results = []
+    skills.each do |skill|
+      results << generate_decorator_top_5_skill(skill)
+    end
+    results
+  end
+
   private
 
   def generate_decorator_result(skill)
@@ -44,6 +53,17 @@ class SkillDecorator
 
     result
   end
+
+  def generate_decorator_top_5_skill(skill)
+    result = DecoratorResult.new
+    result.name = skill[:name]
+    result.power = skill[:power]
+    result.max_pp = skill[:max_pp]
+    result.element_type = skill[:element_type]
+    result.used_count = skill[:used_count]
+    result
+  end
+
 
   def set_link_to_show(skill)
     @context.helpers.link_to skill.name, skill

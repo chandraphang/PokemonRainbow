@@ -15,6 +15,7 @@ class PokemonDecorator
     :element_type,
     :current_experience,
     :image,
+    :used_count,
     :link_to_heal,
     :link_to_show,
     :link_to_edit,
@@ -38,6 +39,15 @@ class PokemonDecorator
     result
   end
 
+  def decorate_for_top_5_pokemon(pokemons)
+    results = []
+    pokemons.each do |pokemon|
+      results << generate_decorator_top_5_pokemon(pokemon)
+    end
+    results
+  end
+
+
   private
 
   def generate_decorator_result(pokemon)
@@ -60,8 +70,26 @@ class PokemonDecorator
     result
   end
 
+  def generate_decorator_top_5_pokemon(pokemon)
+    result = DecoratorResult.new
+    result.pokedex_id = pokemon[:pokedex_id]
+    result.id = pokemon[:id]
+    result.name = pokemon[:name]
+    result.level = pokemon[:level]
+    result.current_health_point = set_current_hp(pokemon)
+    result.attack = pokemon[:attack]
+    result.defence = pokemon[:defence]
+    result.speed = pokemon[:speed]
+    result.element_type = set_element_type(pokemon[:pokedex_id])
+    result.current_experience = pokemon[:current_experience]
+    result.used_count = pokemon[:used_count]
+
+    result
+  end
+
+
   def set_current_hp(pokemon)
-    pokemon.current_health_point.to_s + ' / ' + pokemon.max_health_point.to_s
+    pokemon[:current_health_point].to_s + ' / ' + pokemon[:max_health_point].to_s
   end
 
   def set_element_type(pokemon)

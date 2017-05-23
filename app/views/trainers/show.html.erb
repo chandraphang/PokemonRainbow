@@ -21,7 +21,7 @@
         <td class="col-md-4"><%= @decorated_trainer.password %></td>
       </tr>
     </table>
-
+    <h3>Pokemon Trainer List</h3>
     <table class="table table-bordered">
       <tr>
         <th>Name</th>
@@ -50,7 +50,12 @@
       </tr>
       <% end %>
     </table>
+    <div   id="top_used_pokemon">
 
+    </div>
+    <div   id="top_used_skill">
+
+    </div>
     <%= form_for(@pokemon_trainer, url: trainer_create_pokemon_trainer_path(@decorated_trainer.id)) do |f| %>
     <div class="new_block add-pokemon-skill">
       <h2>Add New Pokemon</h2>
@@ -72,3 +77,45 @@
 
   </div>
 </div>
+
+<script>
+    $(function () {
+    var myChart = Highcharts.chart('top_used_pokemon', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Top Used Pokemon'
+        },
+        xAxis: {
+            categories: ['Pokemons']
+        },
+        yAxis: {
+            title: {
+                text: 'Used Count'
+            }
+        },
+        series: <%= raw @top_used_pokemon.to_json %>
+    });
+  });
+
+    $(function () {
+    var myChart = Highcharts.chart('top_used_skill', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Top Used Skill'
+        },
+        xAxis: {
+            categories: ['Skills']
+        },
+        yAxis: {
+            title: {
+                text: 'Used Count'
+            }
+        },
+        series: <%= raw @top_used_skill.to_json %>
+    });
+  });
+</script>

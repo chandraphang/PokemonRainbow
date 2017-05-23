@@ -35,6 +35,9 @@ class PokemonsController < ApplicationController
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokemon", pokemons_path
     add_breadcrumb @decorated_pokemon.name
+
+
+
   end
 
   def create_pokemon_skill

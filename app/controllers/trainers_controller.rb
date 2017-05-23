@@ -22,6 +22,9 @@ class TrainersController < ApplicationController
     add_breadcrumb "Home", root_path
     add_breadcrumb "Trainer", trainers_path
     add_breadcrumb @decorated_trainer.name
+
+    @top_used_pokemon = PokemonRainbowStatistic.generate_top_used_pokemon_trainer(trainer.id)
+    @top_used_skill = PokemonRainbowStatistic.generate_top_used_skill(trainer.id)
   end
 
   def create_pokemon_trainer

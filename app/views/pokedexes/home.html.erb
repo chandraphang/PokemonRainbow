@@ -2,7 +2,31 @@
 <h2 class="text-center">Welcome to Pokemon Rainbow</h2>
 
 <div class="container">
-    <div id="top_five_pokemon_winner">
+    <div class = "col-md-5 bar" id="top_five_pokemon_winner">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_pokemon_loser">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_pokemon_surrender">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_pokemon_win_rate">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_pokemon_lose_rate">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_most_used_pokemon">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_most_used_skill">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_pokemon_damage">
+
+    </div>
+    <div class = "col-md-5 bar" id="top_five_pokedex_average_level">
 
     </div>
   </div>
@@ -29,4 +53,165 @@
         series: <%= raw @top_5_pokemon_winner.to_json %>
     });
   });
+
+  $(function () {
+    var myChart = Highcharts.chart('top_five_pokemon_loser', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Pokemon Battle Losers'
+        },
+        xAxis: {
+            categories: ['Pokemons']
+        },
+        yAxis: {
+            title: {
+                text: 'Lose Count'
+            }
+        },
+        series: <%= raw @top_5_pokemon_loser.to_json %>
+    });
+  });
+
+  $(function () {
+    var myChart = Highcharts.chart('top_five_pokemon_surrender', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Pokemon Battle Surrenders'
+        },
+        xAxis: {
+            categories: ['Pokemons']
+        },
+        yAxis: {
+            title: {
+                text: 'Surrender Count'
+            }
+        },
+        series: <%= raw @top_5_pokemon_surrender.to_json %>
+    });
+  });
+
+$(function () {
+    var myChart = Highcharts.chart('top_five_pokemon_win_rate', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Pokemon Battle Win Rate'
+        },
+        xAxis: {
+            categories: ['Pokemons']
+        },
+        yAxis: {
+            title: {
+                text: 'Win Rate'
+            }
+        },
+        series: <%= raw @top_5_pokemon_win_rate.to_json %>
+    });
+  });
+
+$(function () {
+    var myChart = Highcharts.chart('top_five_pokemon_lose_rate', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Pokemon Battle Lose Rate'
+        },
+        xAxis: {
+            categories: ['Pokemons']
+        },
+        yAxis: {
+            title: {
+                text: 'Lose Rate'
+            }
+        },
+        series: <%= raw @top_5_pokemon_lose_rate.to_json %>
+    });
+  });
+
+$(function () {
+    var myChart = Highcharts.chart('top_five_most_used_pokemon', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Used Pokemons'
+        },
+        xAxis: {
+            categories: ['Pokemon']
+        },
+        yAxis: {
+            title: {
+                text: 'Used Count'
+            }
+        },
+        series: <%= raw @top_5_most_used_pokemon.to_json %>
+    });
+  });
+
+$(function () {
+    var myChart = Highcharts.chart('top_five_most_used_skill', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Used Skills'
+        },
+        xAxis: {
+            categories: ['Skills']
+        },
+        yAxis: {
+            title: {
+                text: 'Used Count'
+            }
+        },
+        series: <%= raw @top_5_most_used_skill.to_json %>
+    });
+  });
+
+$(function () {
+    var myChart = Highcharts.chart('top_five_pokemon_damage', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Pokemon Damages'
+        },
+        xAxis: {
+            categories: ['Pokemon']
+        },
+        yAxis: {
+            title: {
+                text: 'Damages'
+            }
+        },
+        series: <%= raw @top_5_pokemon_damage.to_json %>
+    });
+  });
+
+$(function () {
+    var myChart = Highcharts.chart('top_five_pokedex_average_level', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Top 5 Pokedex Average Level'
+        },
+        xAxis: {
+            categories: ['Pokedex']
+        },
+        yAxis: {
+            title: {
+                text: 'Level'
+            }
+        },
+        series: <%= raw @top_5_pokedex_average_levels.to_json %>
+    });
+  });
+
 </script>

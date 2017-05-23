@@ -40,6 +40,34 @@
         </tr>
       </table>
     </div>
+    <div class="new_block">
+      <h3>Top 5 Used Pokemon in Same Pokedex</h3>
+    </div>
+    <table class="table table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>Level</th>
+        <th>HP</th>
+        <th>Attack</th>
+        <th>Defence</th>
+        <th>Speed</th>
+        <th>Type</th>
+        <th>Current Experience</th>
+      </tr>
+
+      <% @decorated_top_5_pokemon.each do |f| %>
+      <tr>
+        <td class="col-md-1"><%=f.name%> </td>
+        <td class="col-md-1"><%= f.level%></td>
+        <td class="col-md-1"><%= f.current_health_point%></td>
+        <td class="col-md-1"><%= f.attack %></td>
+        <td class="col-md-1"><%= f.defence %></td>
+        <td class="col-md-1"><%= f.speed %></td>
+        <td class="col-md-1"><%= f.element_type%></td>
+        <td class="col-md-1"><%= f.current_experience %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
   </div>
 </div>

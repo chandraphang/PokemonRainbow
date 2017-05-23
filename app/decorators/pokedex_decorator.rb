@@ -70,6 +70,6 @@ class PokedexDecorator
   end
 
   def set_link_to_remove(pokedex)
-    @context.helpers.button_to 'Remove', pokedex, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-danger btn-remove'
+    @context.helpers.button_to 'Remove', pokedex, :method => 'delete', data: {confirm: 'Are you sure you want to delete it?'}, class: 'btn btn-danger btn-remove', id: 'custom-btn'
   end
 end
