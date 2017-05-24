@@ -61,3 +61,15 @@ pokemons.each do |pokemon|
     t.save
   end
 end
+
+puts 'Seeding Pokemon Evolution data ...'
+csv_text = File.read(Rails.root.join('db', 'pokemon_rainbow', 'list_evolution.csv'))
+pokemon_evolution = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+pokemon_evolution.each do |row|
+  t = PokemonEvolution.new
+  t.pokedex_from_name = row['pokedex_from_name']
+  t.pokedex_to_name = row['pokedex_to_name']
+  t.minimum_level = row['minimum_level']
+  t.save
+
+end

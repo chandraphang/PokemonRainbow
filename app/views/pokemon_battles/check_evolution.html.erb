@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="title-bar">
+    <h1 class="title">Pokemon Evolution</h1>
+  </div>
+  <div class ="padding">
+      <h3 class="text-center">Your Pokemon Is Ready to Evolve</h3>
+      <h5 class="text-center">Do You Want To Evolve Your Pokemon?</h5>
+
+      <%= image_tag @pokemon_winner.pokedex.image_url, :alt => 'Pokemon Image', class: 'pokemon-icon img-center' %>
+      <%= button_to "Yes", pokemon_battle_do_evolution_path, :method => 'do', class: 'btn btn-primary btn-remove img-center attack-btn', id: 'custom-btn'%>
+      <%= button_to "No", @pokemon_battle, :method => 'get', class: 'btn btn-danger btn-remove img-center attack-btn', id: 'custom-btn'%>
+
+  </div>
+</div>
+

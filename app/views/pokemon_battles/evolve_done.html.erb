@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="title-bar">
+    <h1 class="title">Pokemon Evolution</h1>
+  </div>
+  <div class ="padding">
+      <h2 class="text-center">Congratulations!</h2>
+      <h4 class="text-center">Your Pokemon Has Evolved</h4>
+
+      <%= image_tag @pokemon_evolve.pokedex.image_url, :alt => 'Pokemon Image', class: 'pokemon-icon img-center' %>
+      <%= button_to "Back to Pokemon Battle", @pokemon_battle, :method => 'get', class: 'btn btn-primary btn-remove img-center attack-btn', id: 'custom-btn'%>
+  </div>
+</div>
+

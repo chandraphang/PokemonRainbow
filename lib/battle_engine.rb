@@ -1,3 +1,4 @@
+
 class BattleEngine
   attr_reader :errors
 
@@ -111,6 +112,15 @@ class BattleEngine
       @pokemon_battle.pokemon_winner_id = @pokemon_defender.id
       @pokemon_battle.pokemon_loser_id = @pokemon_attacker.id
       @pokemon_battle.state = "Finish"
+      @pokemon_defender.current_experience += PokemonBattleCalculator.calculate_experience(@pokemon_attacker.level)
+      if PokemonBattleCalculator.level_up?(@pokemon_defender.level, @pokemon_defender.current_experience)
+        @pokemon_defender.level += 1
+        stats = PokemonBattleCalculator.calculate_level_up_extra_stats
+        @pokemon_defender.max_health_point += stats.health_point
+        @pokemon_defender.attack += stats.attack_point
+        @pokemon_defender.defence += stats.defence_point
+        @pokemon_defender.speed += stats.speed_point
+      end
     end
   end
 
