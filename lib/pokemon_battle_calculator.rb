@@ -60,9 +60,8 @@ class PokemonBattleCalculator
     extra.attack_point = rand(1..5)
     extra.defence_point = rand(1..5)
     extra.speed_point = rand(1..5)
+
     extra
   end
-
-
 
 end

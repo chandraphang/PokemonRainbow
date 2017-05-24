@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pokemon_evolutions
   resources :pokemon_trainers
   resources :trainers do
     post 'create_pokemon_trainer'
@@ -8,6 +9,12 @@ Rails.application.routes.draw do
     patch 'attack'
     patch 'surrender'
     get 'battle_with_ai'
+    get 'check_evolution'
+    post 'do_evolution'
+    get 'replace_skill'
+    post 'remove_and_add_random_skill'
+    post 'do_remove_and_add_random_skill'
+    get 'evolve_done'
     get 'show_pokemon_battle_log'
   end
   resources :pokemon_skills

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="title-bar">
+    <h1 class="title">Pokemon Evolution</h1>
+  </div>
+  <div class ="padding">
+      <h3 class="text-center">Your Pokemon Is Ready to Evolve</h3>
+      <h5 class="text-center">Do You Want To Evolve Your Pokemon?</h5>
+
+      <%= image_tag @pokemon_evolve.pokedex.image_url, :alt => 'Pokemon Image', class: 'pokemon-icon img-center' %>
+      <h3 class="text-center">Your Pokemon Got a New Skill</h3>
+      <table class="table table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>Power</th>
+        <th>Max PP</th>
+        <th>Element Type</th>
+      </tr>
+      <tr>
+        <td class="col-md-2"><%= @new_skill.name%> </td>
+        <td class="col-md-2"><%= @new_skill.power %></td>
+        <td class="col-md-2"><%= @new_skill.max_pp %></td>
+        <td class="col-md-2"><%= @new_skill.element_type%></td>
+      </tr>
+    </table>
+      <h3 class="text-center"> But Your Pokemon already have 4 skills, do you want to replace one of it?</h3>
+      <h3 class="text-center">Choose one skill below</h3>
+      <%= form_tag pokemon_battle_do_remove_and_add_random_skill_path(@pokemon_battle) , method: :post do %>
+           <%= select_tag("old_skill", options_for_select(PokemonSkill.where(pokemon_id: @pokemon_evolve.id).map {|f| Skill.find(f.skill_id).name }), {class: 'form-control', include_blank: '-- Please Select Skill Below --'})%>
+      <%= hidden_field_tag "new_skill", @new_skill.id %>
+      <%= submit_tag 'Replace', class:"btn btn-danger attack-btn", id: 'custom-btn'%>
+      <% end %>
+      <%= button_to "Cancel", @pokemon_battle, :method => 'get', class: 'btn btn-primary btn-remove img-center attack-btn', id: 'custom-btn'%>
+
+  </div>
+</div>
+
