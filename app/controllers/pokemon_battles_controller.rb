@@ -19,7 +19,6 @@ class PokemonBattlesController < ApplicationController
     add_breadcrumb "Home", root_path
     add_breadcrumb "Pokemon Battle", pokemon_battles_path
     add_breadcrumb "#{@decorated_pokemon_battle.pokemon1} vs #{@decorated_pokemon_battle.pokemon2}"
-
   end
 
   def show_pokemon_battle_log
@@ -155,8 +154,9 @@ class PokemonBattlesController < ApplicationController
         format.json { render :show, status: :created, location: @pokemon_battle }
       end
     end
+
   end
-  # GET /pokemon_battles/new
+
   def new
     @pokemon_battle = PokemonBattle.new
     add_breadcrumb "Home", root_path
@@ -164,10 +164,6 @@ class PokemonBattlesController < ApplicationController
     add_breadcrumb "New"
   end
 
-
-
-  # POST /pokemon_battles
-  # POST /pokemon_battles.json
   def create
     @pokemon_battle = PokemonBattle.new
     if params[:pokemon_battle][:pokemon1_id].present?
@@ -178,7 +174,6 @@ class PokemonBattlesController < ApplicationController
       @pokemon_battle.pokemon2_id = params[:pokemon_battle][:pokemon2_id].to_i
       @pokemon_battle.pokemon2_max_health_point = Pokemon.find(params[:pokemon_battle][:pokemon2_id]).max_health_point
     end
-
 
     @pokemon_battle.current_turn = 1
     @pokemon_battle.state = "On Going"
@@ -219,8 +214,8 @@ class PokemonBattlesController < ApplicationController
         end
       else
         respond_to do |format|
-        format.html { render :new }
-        format.json { render json: @pokemon_battle.errors, status: :unprocessable_entity }
+          format.html { render :new }
+          format.json { render json: @pokemon_battle.errors, status: :unprocessable_entity }
         end
       end
   end

@@ -1,5 +1,6 @@
 require 'csv'
 
+
 puts 'Seeding Pokedex data ...'
 pokedex_text = File.read(Rails.root.join('db', 'pokemon_rainbow', 'list_pokedex.csv'))
 pokedex = CSV.parse(pokedex_text, :headers => true, :encoding => 'ISO-8859-1')
@@ -13,7 +14,7 @@ pokedex.each do |row|
   t.element_type = row['element_type']
   t.image_url = row['image_url']
   t.save
- end
+end
 
 puts 'Seeding Skill data ...'
 csv_text = File.read(Rails.root.join('db', 'pokemon_rainbow', 'list_skill.csv'))
@@ -25,8 +26,7 @@ csv.each do |row|
   t.max_pp = row['max_pp']
   t.element_type = row['element_type']
   t.save
-
- end
+end
 
 puts 'Seeding Pokemon data ...'
 pokedex_id = 1
@@ -71,5 +71,28 @@ pokemon_evolution.each do |row|
   t.pokedex_to_name = row['pokedex_to_name']
   t.minimum_level = row['minimum_level']
   t.save
+end
 
+puts 'Seeding Trainer data ...'
+trainer_count = 1
+while trainer_count <= 10
+  t = Trainer.new
+  t.name = 'trainer' + ' ' +trainer_count.to_s
+  t.email = 'trainer'+ trainer_count.to_s + '@ukirama.com'
+  t.password = '123'
+  t.save
+  trainer_count += 1
+end
+
+puts 'Seeding Pokemon Trainer data ...'
+trainers = Trainer.all
+trainers.each do |trainer|
+  pokemon_amount = rand(2..5)
+  pokemons = Pokemon.all.sample(pokemon_amount)
+  pokemons.each do |pokemon|
+    pokemon_trainer = PokemonTrainer.new
+    pokemon_trainer.trainer_id = trainer.id
+    pokemon_trainer.pokemon_id = pokemon.id
+    pokemon_trainer.save
+  end
 end

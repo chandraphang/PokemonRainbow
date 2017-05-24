@@ -27,9 +27,9 @@
       <%= form_tag pokemon_battle_do_remove_and_add_random_skill_path(@pokemon_battle) , method: :post do %>
            <%= select_tag("old_skill", options_for_select(PokemonSkill.where(pokemon_id: @pokemon_evolve.id).map {|f| Skill.find(f.skill_id).name }), {class: 'form-control', include_blank: '-- Please Select Skill Below --'})%>
       <%= hidden_field_tag "new_skill", @new_skill.id %>
-      <%= submit_tag 'Replace', class:"btn btn-danger attack-btn", id: 'custom-btn'%>
+      <%= submit_tag 'Replace', class:"btn btn-replace attack-btn", id: 'custom-btn'%>
       <% end %>
-      <%= button_to "Cancel", @pokemon_battle, :method => 'get', class: 'btn btn-primary btn-remove img-center attack-btn', id: 'custom-btn'%>
+      <%= button_to "Cancel", @pokemon_battle, :method => 'get', class: 'btn btn-danger btn-remove img-center attack-btn', id: 'custom-btn'%>
 
   </div>
 </div>
